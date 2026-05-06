@@ -2,44 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tema base CLARO — papel mediterráneo de mediodía.
- * Fondo crema cálido, tinta marrón/negro casi-orgánico, naranja del logo manda.
- *
- * Variables como `--bg: R G B` (sin coma) para que Tailwind aplique alpha:
- *   bg-bg/40 → rgb(var(--bg) / 0.4)
+/* SingluFest v2 — modo dual.
+ * `:root` = papel (default).
+ * `.theme-teatro` = sección oscura foodporn.
+ * Variables como `R G B` para que Tailwind aplique alpha.
  */
-:root {
-  --bg: 251 246 235;          /* crema papel #FBF6EB */
-  --bg-alt: 244 234 215;      /* crema más oscuro #F4EAD7 */
-  --bg-inverse: 27 18 9;      /* marrón profundo */
-  --ink: 27 18 9;             /* tinta cálida casi-negra #1B1209 */
-  --ink-muted: 113 90 67;     /* sepia oscuro #715A43 */
+:root,
+.theme-papel {
+  --bg: 251 246 235;          /* hueso #FBF6EB */
+  --bg-alt: 244 234 215;      /* pergamino #F4EAD7 */
+  --bg-inverse: 11 8 7;
+  --ink: 27 18 9;             /* tinta cálida */
+  --ink-muted: 113 90 67;
   --ink-inverse: 251 246 235;
-  --accent: 232 93 31;        /* naranja del logo #E85D1F */
+  --accent: 232 93 31;        /* naranja del logo */
   --accent-soft: 255 122 61;
-  --accent-deep: 175 60 16;   /* naranja quemado para contraste sobre claro */
+  --accent-deep: 175 60 16;
   --accent-contrast: 251 246 235;
-  --line: 27 18 9 / 0.10;     /* hairlines tinta */
-
-  --font-sans: "Manrope", system-ui, sans-serif;
-  --font-display: "Almendra SC", "Cormorant Garamond", serif;
-  --font-script: "Pirata One", "Almendra SC", cursive;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --line: 27 18 9 / 0.10;
 }
 
-/* Tema oscuro opcional (botón futuro) */
-.dark {
-  --bg: 10 8 7;
-  --bg-alt: 20 16 14;
+.theme-teatro {
+  --bg: 11 8 7;               /* carbón #0B0807 */
+  --bg-alt: 20 16 12;         /* brasa #14100C */
   --bg-inverse: 251 246 235;
-  --ink: 251 233 214;
-  --ink-muted: 201 183 156;
+  --ink: 251 246 235;         /* hueso */
+  --ink-muted: 195 175 144;
   --ink-inverse: 27 18 9;
   --accent: 232 93 31;
   --accent-soft: 255 122 61;
   --accent-deep: 194 68 18;
-  --accent-contrast: 10 8 7;
-  --line: 251 233 214 / 0.12;
+  --accent-contrast: 11 8 7;
+  --line: 251 246 235 / 0.12;
+}
+
+/* Tema oscuro forzado (futuro toggle global) */
+.dark {
+  --bg: 11 8 7;
+  --bg-alt: 20 16 12;
+  --bg-inverse: 251 246 235;
+  --ink: 251 246 235;
+  --ink-muted: 195 175 144;
+  --ink-inverse: 27 18 9;
+  --accent: 232 93 31;
+  --accent-contrast: 11 8 7;
+  --line: 251 246 235 / 0.12;
 }
 
 @layer base {
@@ -51,11 +58,27 @@
   }
   body {
     @apply bg-bg text-ink font-sans antialiased;
+    font-size: 18px;
+    line-height: 1.55;
   }
   ::selection { background: rgb(var(--accent)); color: rgb(var(--bg)); }
+
   h1, h2, h3, h4 {
     @apply font-display tracking-tight;
-    font-feature-settings: "liga", "dlig", "calt", "swsh";
+  }
+  /* Headlines brutales — Anton condensada, peso visual fuerte */
+  .h-brutal {
+    font-family: var(--font-brutal);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+  /* Cursivas emocionales — Pirata One */
+  .h-script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    text-transform: none;
   }
 }
 
@@ -64,21 +87,29 @@
   .container-wide  { @apply container max-w-7xl; }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide uppercase transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold tracking-[0.12em] uppercase transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
     @apply btn text-bg bg-ink hover:bg-accent-deep;
   }
   .btn-accent {
-    @apply btn bg-brand-orange text-bg shadow-[0_4px_20px_-4px_rgba(232,93,31,0.45)] hover:bg-brand-tangerine hover:shadow-[0_8px_28px_-4px_rgba(255,122,61,0.6)] hover:-translate-y-0.5;
+    @apply btn bg-brand-orange text-brand-carbon shadow-[0_8px_28px_-6px_rgba(232,93,31,0.55)] hover:bg-brand-tangerine hover:shadow-[0_12px_36px_-6px_rgba(255,122,61,0.7)] hover:-translate-y-0.5 active:translate-y-0;
+    animation: pulse-orange 4s ease-in-out infinite;
   }
   .btn-ghost   { @apply btn bg-transparent text-ink hover:bg-bg-alt; }
-  .btn-outline { @apply btn border border-ink/15 text-ink hover:bg-bg-alt hover:border-brand-orange/60; }
-  .btn-lg      { @apply px-7 py-3.5 text-sm; }
+  .btn-outline { @apply btn border border-ink/20 text-ink hover:bg-bg-alt hover:border-brand-orange/60; }
+  .btn-lg      { @apply px-8 py-4 text-base; }
+  .btn-xl      { @apply px-10 py-5 text-lg; }
 
   .badge {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-ink/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-ink-muted;
     font-family: var(--font-sans);
+  }
+  .badge-accent {
+    @apply badge !text-brand-orange !border-brand-orange/40;
+  }
+  .badge-hot {
+    @apply badge !text-brand-carbon !bg-brand-orange !border-brand-orange;
   }
 
   .card {
@@ -87,14 +118,14 @@
   }
   .card-elevated {
     @apply card shadow-soft;
-    background: linear-gradient(180deg, rgb(var(--bg) / 0.85) 0%, rgb(var(--bg-alt) / 0.7) 100%);
+    background: linear-gradient(180deg, rgb(var(--bg) / 0.85) 0%, rgb(var(--bg-alt) / 0.75) 100%);
   }
 
   .field-label {
-    @apply block text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted;
+    @apply block text-[10px] font-bold uppercase tracking-[0.22em] text-ink-muted;
   }
   .field-input {
-    @apply mt-1.5 block w-full rounded-xl border-ink/15 px-4 py-3 text-base text-ink focus:border-accent focus:ring-2 focus:ring-accent/30;
+    @apply mt-1.5 block w-full rounded-xl border-ink/20 px-4 py-3 text-base text-ink focus:border-accent focus:ring-2 focus:ring-accent/30;
     background: rgb(var(--bg) / 0.85);
   }
   .field-input::placeholder { color: rgb(var(--ink-muted) / 0.5); }
@@ -102,49 +133,52 @@
     @apply mt-1.5 text-xs text-accent-deep;
   }
 
-  .hairline { @apply h-px w-full; background: rgb(var(--ink) / 0.08); }
-
-  .ornament {
-    @apply flex items-center gap-3 text-accent;
-    font-family: var(--font-display);
-  }
-  .ornament::before, .ornament::after {
-    content: "";
-    @apply h-px flex-1 bg-gradient-to-r from-transparent via-brand-orange/40 to-transparent;
-  }
+  .hairline { @apply h-px w-full; background: rgb(var(--ink) / 0.10); }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
   .text-pretty  { text-wrap: pretty; }
 
-  /* Fondo festival cálido — tonos suaves de cítricos/granada/Alhambra */
-  .bg-festival {
-    background-image:
-      radial-gradient(1100px 600px at 10% -10%, rgba(232,93,31,0.10), transparent 60%),
-      radial-gradient(900px 600px at 100% 30%, rgba(212,162,58,0.10), transparent 60%),
-      radial-gradient(900px 700px at 30% 110%, rgba(232,93,31,0.08), transparent 60%);
+  /* Glow naranja sobre fondo oscuro */
+  .glow-orange {
+    text-shadow: 0 0 22px rgba(232,93,31,0.45), 0 0 60px rgba(232,93,31,0.25);
   }
 
-  /* Grano cálido sutil */
-  .bg-grain::after {
+  /* Vignette para fotos de comida */
+  .vignette {
+    box-shadow: inset 0 0 120px 40px rgba(11, 8, 7, 0.55);
+  }
+
+  /* Grano cinematográfico */
+  .grain::after {
     content: "";
     pointer-events: none;
-    position: fixed;
+    position: absolute;
     inset: 0;
-    z-index: 1;
     background-image:
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.65 0 0 0 0 0.35 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
-    opacity: 0.05;
-    mix-blend-mode: multiply;
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    mix-blend-mode: overlay;
   }
 
   .mask-fade-x {
     mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   }
 
-  /* Resplandor naranja sutil — visible solo en KPIs/títulos clave */
-  .glow-orange {
-    text-shadow: 0 0 22px rgba(232,93,31,0.35), 0 0 48px rgba(232,93,31,0.20);
+  /* Marquee brutal */
+  .marquee-track {
+    will-change: transform;
+    animation: marquee-scroll 36s linear infinite;
   }
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 8px 28px -6px rgba(232,93,31,0.55); }
+  50%      { box-shadow: 0 14px 44px -6px rgba(232,93,31,0.85); }
 }

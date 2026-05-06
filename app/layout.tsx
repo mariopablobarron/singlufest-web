@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
-import { Almendra_SC, Pirata_One, Manrope, JetBrains_Mono } from "next/font/google";
+import { Anton, Almendra_SC, Pirata_One, Manrope, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 
-// Display principal — capitales con flourishes art-nouveau, lo más cercano al lettering del logo.
+// Headline brutalist (sustituto gratuito de Druk Wide).
+const anton = Anton({
+  subsets: ["latin"],
+  variable: "--font-brutal",
+  weight: "400",
+  display: "swap",
+});
+
+// Ornamental art-nouveau (alma del logo).
 const almendra = Almendra_SC({
   subsets: ["latin"],
   variable: "--font-display",
@@ -12,7 +20,7 @@ const almendra = Almendra_SC({
   display: "swap",
 });
 
-// Display script para citas y momentos cinematográficos.
+// Script emocional.
 const pirata = Pirata_One({
   subsets: ["latin"],
   variable: "--font-script",
@@ -20,7 +28,7 @@ const pirata = Pirata_One({
   display: "swap",
 });
 
-// Body humanista, legible.
+// Body.
 const manrope = Manrope({
   subsets: ["latin", "latin-ext"],
   variable: "--font-sans",
@@ -40,7 +48,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE.name}`,
   },
   description:
-    "Showcookings, charlas, catas y mercado: el gran encuentro sin gluten en Granada. Reservas, programa y novedades.",
+    "El paraíso existe y no tiene trazas. El primer festival foodie 100% sin gluten en Granada. 70+ obradores premium, 20+ chefs en directo, 0 excusas.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -48,23 +56,20 @@ export const metadata: Metadata = {
     url: SITE.url,
     siteName: SITE.name,
     title: `${SITE.name} — ${SITE.tagline}`,
-    description: "Showcookings, charlas, catas y mercado. Granada celebra la cocina sin gluten.",
+    description: "El primer festival foodie 100% sin gluten. Granada, noviembre 2026.",
     images: ["/brand/og-default.png"],
   },
   twitter: { card: "summary_large_image" },
   icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/brand/logo.png", sizes: "any", type: "image/png" },
-    ],
+    icon: [{ url: "/favicon.ico" }, { url: "/brand/logo.png", type: "image/png" }],
     apple: "/brand/apple-icon.png",
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport = {
-  themeColor: "#FBF6EB",
-  colorScheme: "light" as const,
+  themeColor: "#0B0807",
+  colorScheme: "light dark" as const,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -74,17 +79,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="es"
-      className={`${manrope.variable} ${almendra.variable} ${pirata.variable} ${jetbrains.variable}`}
+      className={`${manrope.variable} ${anton.variable} ${almendra.variable} ${pirata.variable} ${jetbrains.variable}`}
     >
-      <body className="bg-bg text-ink min-h-screen flex flex-col bg-festival bg-grain">
+      <body className="bg-bg text-ink min-h-screen flex flex-col">
         {children}
         {umamiSrc && umamiId && (
-          <Script
-            src={umamiSrc}
-            data-website-id={umamiId}
-            strategy="afterInteractive"
-            defer
-          />
+          <Script src={umamiSrc} data-website-id={umamiId} strategy="afterInteractive" defer />
         )}
       </body>
     </html>

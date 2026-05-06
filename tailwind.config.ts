@@ -6,7 +6,6 @@ const config: Config = {
     "./components/**/*.{ts,tsx}",
     "./lib/**/*.{ts,tsx}",
   ],
-  // Tema oscuro como base — la marca vive en negro + naranja brillante.
   darkMode: "class",
   theme: {
     container: {
@@ -17,17 +16,17 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          ink: "#0A0807",        // negro cálido (fondo)
-          night: "#14100E",      // negro un toque más alto
-          ember: "#1F1610",      // marrón oscuro
-          orange: "#E85D1F",     // NARANJA principal del logo
-          tangerine: "#FF7A3D",  // hover/luz
-          ember2: "#C24412",     // sombra del naranja
-          gold: "#D4A23A",       // oro Alhambra (detalles)
-          rose: "#F4A06B",       // pastel cálido
-          cream: "#FBE9D6",      // texto crema
-          paper: "#FFF6E9",      // crema claro
-          tile: "#1B2D2A",       // verde mosaico apagado
+          carbon: "#0B0807",      // Carbón teatro
+          ember: "#14100C",       // Brasa teatro alt
+          bone: "#FBF6EB",        // Hueso papel
+          parchment: "#F4EAD7",   // Pergamino papel alt
+          orange: "#E85D1F",      // Naranja del logo
+          tangerine: "#FF7A3D",   // Hover/luz
+          burn: "#C24412",        // Brasa-deep
+          gold: "#D4A23A",        // Oro Alhambra
+          lemon: "#F5C56B",       // Limón scarcity
+          wine: "#6B1D2E",        // Vino VIP / Mesa del Chef
+          ink: "#1B1209",         // Tinta cálida
         },
         bg: {
           DEFAULT: "rgb(var(--bg) / <alpha-value>)",
@@ -48,27 +47,26 @@ const config: Config = {
         line: "rgb(var(--line))",
       },
       fontFamily: {
-        // Display ornamental (lettering tipo logo) — Almendra SC desde Google Fonts.
+        // Brutal headline (Anton — sustituto gratis de Druk Wide)
+        brutal: ["var(--font-brutal)", "Impact", "Anton", "sans-serif"],
+        // Display ornamental (alma art-nouveau del logo)
         display: ["var(--font-display)", "Cormorant Garamond", "serif"],
-        // Display alternativo (script con personalidad)
+        // Script emocional
         script: ["var(--font-script)", "var(--font-display)", "cursive"],
-        // Texto humanista para legibilidad
+        // Body
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       fontSize: {
-        "display-xl": ["clamp(3.5rem, 9vw, 8rem)", { lineHeight: "0.95", letterSpacing: "0", fontWeight: "400" }],
-        "display-lg": ["clamp(2.75rem, 6.5vw, 5.5rem)", { lineHeight: "1", letterSpacing: "0.005em", fontWeight: "400" }],
-        "display-md": ["clamp(1.85rem, 3.6vw, 3.25rem)", { lineHeight: "1.05", letterSpacing: "0.01em", fontWeight: "400" }],
+        "display-xl": ["clamp(4rem, 11vw, 9rem)", { lineHeight: "0.9", letterSpacing: "-0.02em", fontWeight: "400" }],
+        "display-lg": ["clamp(3rem, 7.5vw, 6.5rem)", { lineHeight: "0.92", letterSpacing: "-0.015em", fontWeight: "400" }],
+        "display-md": ["clamp(2rem, 4.5vw, 3.75rem)", { lineHeight: "0.96", letterSpacing: "-0.01em", fontWeight: "400" }],
+        "display-sm": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.05", letterSpacing: "-0.005em", fontWeight: "400" }],
       },
       backgroundImage: {
-        "spotlight":
-          "radial-gradient(ellipse at top, rgba(232,93,31,0.12), transparent 55%)",
-        "ember":
-          "radial-gradient(800px 500px at 80% 110%, rgba(232,93,31,0.10), transparent 60%)",
-        "festival":
-          "radial-gradient(1100px 600px at 10% -10%, rgba(232,93,31,0.10), transparent 60%), radial-gradient(900px 600px at 100% 30%, rgba(212,162,58,0.10), transparent 60%), radial-gradient(900px 700px at 30% 110%, rgba(232,93,31,0.08), transparent 60%)",
-        "noise": "url('/brand/noise.svg')",
+        "spotlight": "radial-gradient(ellipse at top, rgba(232,93,31,0.18), transparent 55%)",
+        "ember": "radial-gradient(800px 500px at 80% 110%, rgba(232,93,31,0.18), transparent 60%)",
+        "festival": "radial-gradient(1100px 600px at 10% -10%, rgba(232,93,31,0.10), transparent 60%), radial-gradient(900px 600px at 100% 30%, rgba(212,162,58,0.10), transparent 60%), radial-gradient(900px 700px at 30% 110%, rgba(232,93,31,0.08), transparent 60%)",
       },
       borderRadius: {
         xl: "1rem",
@@ -76,22 +74,14 @@ const config: Config = {
         "3xl": "2rem",
       },
       boxShadow: {
-        soft: "0 4px 24px -8px rgba(0, 0, 0, 0.55)",
+        soft: "0 4px 24px -8px rgba(0, 0, 0, 0.18)",
         glow: "0 0 0 1px rgba(232,93,31,0.45), 0 12px 40px -12px rgba(232,93,31,0.6)",
         emboss: "inset 0 1px 0 rgba(255,246,233,0.06), 0 1px 0 rgba(0,0,0,0.4)",
       },
       keyframes: {
-        marquee: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-50%)" },
-        },
         "fade-up": {
           from: { opacity: "0", transform: "translateY(20px)" },
           to: { opacity: "1", transform: "translateY(0)" },
-        },
-        glow: {
-          "0%, 100%": { textShadow: "0 0 20px rgba(232,93,31,0.4), 0 0 40px rgba(232,93,31,0.2)" },
-          "50%": { textShadow: "0 0 28px rgba(232,93,31,0.6), 0 0 60px rgba(232,93,31,0.35)" },
         },
         flicker: {
           "0%, 100%": { opacity: "1" },
@@ -104,9 +94,7 @@ const config: Config = {
         },
       },
       animation: {
-        marquee: "marquee 50s linear infinite",
         "fade-up": "fade-up 0.7s ease-out both",
-        glow: "glow 4s ease-in-out infinite",
         flicker: "flicker 5s linear infinite",
         floaty: "floaty 6s ease-in-out infinite",
       },
