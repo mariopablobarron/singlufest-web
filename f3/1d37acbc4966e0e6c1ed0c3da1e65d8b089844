@@ -1,0 +1,42 @@
+components/HeroBadge.tsx
+  s_2973c3e7d39dce::t_ce9041dd89cc04 12
+components/Hero.tsx
+  s_2973c3e7d39dce::t_2848537ec89be5 36
+components/VideoWall.tsx
+  s_2973c3e7d39dce::t_172df31ef08438 30
+  s_2973c3e7d39dce::t_c0dac397dff30f 24
+components/Footer.tsx
+  s_2973c3e7d39dce::t_a2f1dad7275e0a 9,23,29,60
+app/layout.tsx
+  s_2973c3e7d39dce::t_98c59605865071 66-67
+app/globals.css
+  s_2973c3e7d39dce::t_134de4874f82b3 5-7,12-18,20-22,30-42,70,73,76,80,85-86,90,97-98,102,105,121,124-126,129,137-139,146,148
+components/NavBar.tsx
+  s_2973c3e7d39dce::t_452ddfb3095f32 54
+  s_2973c3e7d39dce::t_a2f46e5c8d1baa 44
+  s_2973c3e7d39dce::t_6fdc0facebd0b4 72-73
+app/(public)/page.tsx
+  s_2973c3e7d39dce::t_6913cefc1cd736 158
+  s_2973c3e7d39dce::t_6cbc5d94c83ab2 171-172
+  s_2973c3e7d39dce::t_44a8b2f08079b8 85
+tailwind.config.ts
+  s_2973c3e7d39dce::t_6a7bb55ce8618b 66,68,70
+components/SponsorGrid.tsx
+  s_2973c3e7d39dce::t_521d5e19d25868 58,66,72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "f31d37acbc4966e0e6c1ed0c3da1e65d8b089844",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
