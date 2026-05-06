@@ -3,7 +3,7 @@ import { ThemedSection } from "./SectionTheme";
 
 export function ManifestoV2() {
   return (
-    <ThemedSection theme="papel" className="py-24 md:py-36 border-t border-line">
+    <ThemedSection className="py-24 md:py-36">
       <div className="container max-w-4xl">
         <p className="badge mb-8">Manifiesto</p>
         <h2 className="text-display-lg text-balance">
@@ -17,14 +17,16 @@ export function ManifestoV2() {
             en otros países montaban festivales con chefs Michelin sin gluten. Aquí no.
           </p>
           <p>
-            <strong className="text-ink">SingluFest es nuestra respuesta.</strong> Tres días en Granada con los
-            mejores obradores y chefs del país cocinando para ti. Sin compromisos.
-            Sin <em>“ya he limpiado la sartén”</em>. Sin trazas. Aquí tú eres el rey.
+            <strong className="text-ink">SingluFest no es una feria.</strong> Es un concurso.
+            12 chefs traen su mejor plato sin gluten. Tú lo pruebas, tú lo votas.
+            Sin compromisos. Sin <em>"ya he limpiado la sartén"</em>. Sin trazas.
+            Aquí tú eres el rey, no la excepción.
           </p>
         </div>
 
         <div className="mt-12 flex flex-wrap gap-4">
           <Link href="/manifiesto" className="btn-primary">Lee el manifiesto completo →</Link>
+          <Link href="#cartel" className="btn-outline">ver los candidatos</Link>
         </div>
       </div>
     </ThemedSection>

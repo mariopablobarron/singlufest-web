@@ -33,10 +33,11 @@ COPY --from=builder --chown=app:app /app/public ./public
 COPY --from=builder --chown=app:app /app/.next/standalone ./
 COPY --from=builder --chown=app:app /app/.next/static ./.next/static
 COPY --from=builder --chown=app:app /app/prisma ./prisma
-COPY --from=builder --chown=app:app /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder --chown=app:app /app/node_modules/@prisma/client ./node_modules/@prisma/client
-COPY --from=builder --chown=app:app /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder --chown=app:app /app/scripts ./scripts
 COPY --from=builder --chown=app:app /app/agents ./agents
+COPY --from=builder --chown=app:app /app/lib ./lib
+COPY --from=builder --chown=app:app /app/tsconfig.json ./tsconfig.json
+COPY --from=builder --chown=app:app /app/node_modules ./node_modules
 
 USER app
 EXPOSE 3000

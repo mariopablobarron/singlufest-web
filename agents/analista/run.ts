@@ -72,7 +72,7 @@ export async function runAnalista({
   const resp = await client.messages.create({
     model,
     max_tokens: 800,
-    system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
+    system: SYSTEM,
     messages: [{ role: "user", content: dataDump }],
   });
 

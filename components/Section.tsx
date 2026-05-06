@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 import type { HTMLAttributes, ReactNode } from "react";
 
-type Props = HTMLAttributes<HTMLElement> & {
+type Props = Omit<HTMLAttributes<HTMLElement>, "title"> & {
   eyebrow?: string;
   title?: ReactNode;
   description?: ReactNode;

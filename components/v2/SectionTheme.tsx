@@ -2,21 +2,27 @@ import { cn } from "@/lib/utils";
 import type { HTMLAttributes } from "react";
 
 /**
- * Wrapper que aplica el tema (teatro oscuro / papel claro) cambiando las CSS vars.
- * Cualquier hijo que use `bg-bg`, `text-ink`, `text-ink-muted`, `bg-bg-alt`, etc.
- * heredará automáticamente el tema correcto.
+ * Wrapper de sección. En SingluFest v2 todas las secciones viven en papel claro.
+ * Mantengo la prop `theme` por compat pero ya no aplica oscuridad — el contraste
+ * lo damos con cards de color (naranja/vino/lemon) sobre el fondo crema.
  */
 type Props = HTMLAttributes<HTMLElement> & {
-  theme: "teatro" | "papel";
+  theme?: "papel" | "teatro"; // teatro queda como variante puntual si la quieres
+  alt?: boolean;
   as?: "section" | "header" | "footer" | "div";
 };
 
-export function ThemedSection({ theme, as: Tag = "section", className, ...rest }: Props) {
+export function ThemedSection({ theme = "papel", alt, as: Tag = "section", className, ...rest }: Props) {
+  const isTeatro = theme === "teatro";
   return (
     <Tag
       className={cn(
-        theme === "teatro" ? "theme-teatro bg-bg text-ink" : "theme-papel bg-bg text-ink",
         "relative",
+        isTeatro
+          ? "theme-teatro bg-brand-carbon text-brand-bone"
+          : alt
+            ? "bg-brand-parchment text-ink"
+            : "bg-bg text-ink",
         className,
       )}
       {...rest}

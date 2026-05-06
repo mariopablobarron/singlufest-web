@@ -26,7 +26,7 @@ export default async function HomePage() {
   return (
     <>
       <HeroV2 bookingsOpen={bookingsOpen} ticketsLeft={312} generalPrice={18} />
-      <MarqueeV2 theme="teatro" />
+      <MarqueeV2 />
       <ManifestoV2 />
       <div id="cartel" />
       <CartelV2 />

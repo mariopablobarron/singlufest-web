@@ -7,8 +7,9 @@ import { LogoTypo } from "../LogoTypo";
 import { SITE } from "@/lib/site";
 
 /**
- * Hero v2 — modo teatro full-bleed con vídeo placeholder, frase puñetazo y CTA agresivo.
- * Cuando llegue un vídeo de cabecera real, se sustituye el src del <video>.
+ * Hero v2 — Champions-Burger style.
+ * Fondo crema cálido con gran foto de plato en columna derecha, headline
+ * brutal + "no tiene trazas" en script, CTA naranja vibrante con scarcity.
  */
 export function HeroV2({
   bookingsOpen = false,
@@ -23,83 +24,102 @@ export function HeroV2({
 }) {
   const showLogo = hasOfficialLogo();
   return (
-    <ThemedSection theme="teatro" className="relative isolate overflow-hidden min-h-[92vh] flex items-center">
-      {/* Vídeo / fondo cinematográfico */}
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-bg pointer-events-none" />
-        <div className="absolute inset-0 bg-spotlight" />
-        <div className="absolute inset-0 bg-ember opacity-70" />
-        <div className="grain absolute inset-0" />
-      </div>
+    <ThemedSection className="relative isolate overflow-hidden pt-24 md:pt-32 pb-20 md:pb-28">
+      {/* Halos cálidos */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-festival" />
+      <div aria-hidden className="absolute top-20 -right-32 w-[60rem] h-[60rem] rounded-full bg-brand-orange/10 blur-3xl -z-10" />
 
-      <div className="container max-w-6xl py-20 md:py-28 relative">
-        {/* Badge edición + scarcity */}
-        <div className="mb-8 flex flex-wrap items-center gap-3">
-          <span className="badge !text-brand-orange !border-brand-orange/40 backdrop-blur">
-            ⚡ {edition}
-          </span>
-          <span className="badge !text-brand-bone !border-brand-bone/30 backdrop-blur">
-            Sold out 2025
-          </span>
-        </div>
+      <div className="container max-w-7xl grid lg:grid-cols-[1.15fr_1fr] gap-12 items-center">
+        {/* Columna izquierda — texto */}
+        <div className="relative">
+          <div className="mb-8 flex flex-wrap items-center gap-3">
+            <span className="badge-hot">⚡ {edition}</span>
+            <span className="badge !text-brand-orange !border-brand-orange/40">Sold out 2025</span>
+          </div>
 
-        {/* Logo pequeño arriba si existe */}
-        {showLogo && (
-          <div className="mb-6 opacity-90">
+          {showLogo ? (
             <Image
               src="/brand/logo.png"
               alt="SingluFest"
-              width={220}
-              height={100}
+              width={260}
+              height={120}
               priority
-              className="object-contain w-32 md:w-44 h-auto drop-shadow-[0_0_30px_rgba(232,93,31,0.45)]"
+              className="mb-8 object-contain w-40 md:w-52 h-auto drop-shadow-[0_0_24px_rgba(232,93,31,0.30)]"
             />
+          ) : (
+            <LogoTypo className="mb-8 !text-3xl" />
+          )}
+
+          <h1 className="text-display-xl text-balance">
+            <span className="block h-brutal text-ink">El paraíso existe.</span>
+            <span className="block h-script text-brand-orange mt-2 md:mt-4">y no tiene trazas.</span>
+          </h1>
+
+          <p className="mt-8 max-w-xl text-lg md:text-2xl text-ink/80 text-pretty">
+            12 chefs. 12 platos. <strong className="text-ink">1 ganador.</strong>
+            <br />
+            El primer concurso gastronómico 100% sin gluten de España.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Link href="/entradas" className="btn-accent btn-xl group">
+              <Ticket className="w-5 h-5" />
+              Quiero mi entrada
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link href="#cartel" className="btn-outline btn-lg">
+              ver los candidatos
+            </Link>
           </div>
-        )}
-        {!showLogo && <LogoTypo className="mb-6 !text-3xl" />}
 
-        {/* H1 brutal con script emocional */}
-        <h1 className="text-display-xl text-balance">
-          <span className="block h-brutal text-brand-bone">El paraíso existe.</span>
-          <span className="block h-script text-brand-orange glow-orange mt-2 md:mt-4">
-            y no tiene trazas.
-          </span>
-        </h1>
-
-        {/* Sub */}
-        <p className="mt-8 max-w-2xl text-lg md:text-2xl text-brand-bone/85 text-pretty">
-          El primer festival foodie 100% sin gluten.
-          <span className="text-brand-bone"> 70+ obradores premium</span>,
-          <span className="text-brand-bone"> 20+ chefs en directo</span>,
-          <span className="text-brand-orange"> 0 excusas</span>.
-        </p>
-
-        {/* CTAs */}
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Link href="/entradas" className="btn-accent btn-xl group">
-            <Ticket className="w-5 h-5" />
-            Quiero mi entrada
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <Link href="#cartel" className="btn-outline btn-lg !text-brand-bone !border-brand-bone/30 hover:!border-brand-orange hover:!text-brand-orange">
-            ver el cartel completo
-          </Link>
+          <p className="mt-6 text-sm text-ink-muted flex items-center gap-2">
+            <span className="inline-block w-2 h-2 rounded-full bg-brand-orange animate-flicker" />
+            Last release · quedan <strong className="text-brand-orange">{ticketsLeft}</strong> entradas · desde {generalPrice}€
+          </p>
         </div>
 
-        {/* Scarcity microcopy */}
-        <p className="mt-6 text-sm text-brand-bone/70 flex items-center gap-2">
-          <span className="inline-block w-2 h-2 rounded-full bg-brand-orange animate-flicker" />
-          Last release · quedan <strong className="text-brand-orange">{ticketsLeft}</strong> entradas · desde {generalPrice}€
-        </p>
+        {/* Columna derecha — "plato estrella" placeholder */}
+        <div className="relative">
+          <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-brand-orange via-brand-tangerine to-brand-burn relative overflow-hidden grain shadow-[0_30px_60px_-20px_rgba(194,68,18,0.5)]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-10">
+              <p className="badge !text-brand-bone !border-brand-bone/40 mb-6 backdrop-blur">El plato del año</p>
+              <p className="h-brutal text-display-md text-brand-bone leading-none">LA REINA</p>
+              <p className="mt-3 text-brand-bone/85">por KIMCAKES</p>
+              <p className="mt-6 text-sm text-brand-bone/75 max-w-xs">
+                Tarta volcánica de queso, base de almendra tostada y caramelo de cerveza sin gluten.
+              </p>
+              <p className="mt-6 h-brutal text-4xl text-brand-bone glow-orange">7€</p>
+            </div>
+            {/* Etiqueta de seguridad */}
+            <span className="absolute top-5 right-5 badge !text-brand-carbon !bg-brand-bone !border-brand-bone backdrop-blur">
+              0 trazas
+            </span>
+            {/* Numeración */}
+            <span className="absolute bottom-5 left-5 h-brutal text-2xl text-brand-bone/80">#01</span>
+          </div>
+
+          {/* Cartelillo flotante */}
+          <div className="hidden md:block absolute -bottom-6 -left-6 rotate-[-4deg] bg-brand-carbon text-brand-bone p-4 rounded-xl shadow-soft">
+            <p className="h-brutal text-sm leading-none text-brand-orange">Vota tu favorita</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-brand-bone/70 mt-1">Premio del público 2026</p>
+          </div>
+        </div>
       </div>
 
-      {/* Esquina inferior con KPIs ligeros */}
-      <div aria-hidden className="absolute bottom-0 inset-x-0 border-t border-line bg-bg/40 backdrop-blur-md">
-        <div className="container max-w-6xl py-4 flex flex-wrap gap-x-10 gap-y-2 items-center justify-center md:justify-between text-xs uppercase tracking-[0.22em] text-ink-muted">
-          <span>3 días · {SITE.edition.city}</span>
-          <span>+70 obradores premium</span>
-          <span>20+ showcookings</span>
-          <span className="text-brand-orange">100% sin gluten</span>
+      {/* Tira inferior con KPIs */}
+      <div className="container max-w-7xl mt-20 md:mt-28">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+          {[
+            { kpi: "12", label: "candidatos en concurso" },
+            { kpi: "20+", label: "showcookings en directo" },
+            { kpi: "3", label: "días en granada" },
+            { kpi: "0%", label: "trazas, sin excusas" },
+          ].map((it) => (
+            <div key={it.label} className="card text-center">
+              <p className="h-brutal text-display-md text-brand-orange glow-orange">{it.kpi}</p>
+              <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-ink-muted">{it.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </ThemedSection>

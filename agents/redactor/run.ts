@@ -66,9 +66,7 @@ export async function runRedactor({
     const resp = await client.messages.create({
       model,
       max_tokens: 4000,
-      system: [
-        { type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } },
-      ],
+      system: SYSTEM,
       messages: [
         {
           role: "user",
