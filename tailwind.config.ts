@@ -63,11 +63,11 @@ const config: Config = {
       },
       backgroundImage: {
         "spotlight":
-          "radial-gradient(ellipse at top, rgba(232,93,31,0.18), transparent 55%)",
+          "radial-gradient(ellipse at top, rgba(232,93,31,0.12), transparent 55%)",
         "ember":
-          "radial-gradient(800px 500px at 80% 110%, rgba(232,93,31,0.22), transparent 60%)",
+          "radial-gradient(800px 500px at 80% 110%, rgba(232,93,31,0.10), transparent 60%)",
         "festival":
-          "radial-gradient(1100px 600px at 10% -10%, rgba(232,93,31,0.18), transparent 60%), radial-gradient(900px 600px at 100% 30%, rgba(212,162,58,0.10), transparent 60%), radial-gradient(900px 700px at 30% 110%, rgba(232,93,31,0.10), transparent 60%)",
+          "radial-gradient(1100px 600px at 10% -10%, rgba(232,93,31,0.10), transparent 60%), radial-gradient(900px 600px at 100% 30%, rgba(212,162,58,0.10), transparent 60%), radial-gradient(900px 700px at 30% 110%, rgba(232,93,31,0.08), transparent 60%)",
         "noise": "url('/brand/noise.svg')",
       },
       borderRadius: {

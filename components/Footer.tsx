@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-line bg-bg-alt/40 backdrop-blur-sm">
+    <footer className="relative border-t border-ink/10 bg-bg-alt/40 backdrop-blur-sm">
       <div className="container max-w-7xl py-16 md:py-20">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
@@ -20,13 +20,13 @@ export function Footer() {
                 href={SITE.social.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-line text-sm hover:border-brand-orange/60 hover:text-brand-orange transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ink/15 text-sm hover:border-brand-orange/60 hover:text-brand-orange transition-colors"
               >
                 <Instagram className="w-4 h-4" /> {SITE.social.instagramHandle}
               </a>
               <a
                 href={`mailto:${SITE.contact.email}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-line text-sm hover:border-brand-orange/60 hover:text-brand-orange transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ink/15 text-sm hover:border-brand-orange/60 hover:text-brand-orange transition-colors"
               >
                 <Mail className="w-4 h-4" /> {SITE.contact.email}
               </a>
@@ -57,7 +57,7 @@ export function Footer() {
           </div>
         </div>
 
-        <hr className="my-10 border-line" />
+        <hr className="my-10 border-ink/10" />
         <p className="text-xs text-ink-muted text-center">
           © {year} <span className="font-display text-brand-orange">{SITE.name}</span> · hecho en Granada con cariño y sin gluten ·
           <a className="ml-1 underline-offset-4 hover:underline hover:text-brand-orange" href="https://startidea.es" target="_blank" rel="noreferrer">

@@ -33,7 +33,7 @@ export function Hero({
           </div>
         )}
 
-        <p className="mt-6 font-script text-3xl md:text-5xl text-brand-cream animate-fade-up">
+        <p className="mt-6 font-script text-3xl md:text-5xl text-ink animate-fade-up">
           el festival sin gluten <span className="text-brand-orange">de Granada</span>
         </p>
 

@@ -41,7 +41,7 @@ export function NavBar() {
                 "px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] transition-all",
                 item.emphasis
                   ? "btn-accent !px-5 ml-3"
-                  : "text-brand-cream/80 hover:text-brand-orange",
+                  : "text-ink/75 hover:text-brand-orange",
               )}
             >
               {item.label}
@@ -51,7 +51,7 @@ export function NavBar() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden p-2 rounded-full text-brand-cream hover:bg-bg-alt"
+          className="md:hidden p-2 rounded-full text-ink hover:bg-bg-alt"
           aria-label="Abrir menú"
         >
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -69,8 +69,8 @@ export function NavBar() {
                 className={cn(
                   "px-4 py-3 rounded-xl text-sm font-semibold uppercase tracking-wider",
                   item.emphasis
-                    ? "bg-brand-orange text-brand-ink"
-                    : "text-brand-cream hover:bg-bg-alt",
+                    ? "bg-brand-orange text-bg"
+                    : "text-ink hover:bg-bg-alt",
                 )}
               >
                 {item.label}

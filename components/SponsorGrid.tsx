@@ -55,7 +55,7 @@ export function SponsorGrid({ sponsors }: { sponsors: Sponsor[] }) {
                   href={s.websiteUrl ?? "#"}
                   target={s.websiteUrl ? "_blank" : undefined}
                   rel={s.websiteUrl ? "noreferrer" : undefined}
-                  className="group flex items-center justify-center rounded-2xl border border-line bg-bg p-6 transition hover:bg-bg-alt hover:shadow-soft"
+                  className="group flex items-center justify-center rounded-2xl border border-ink/10 bg-bg p-6 transition hover:bg-bg-alt hover:shadow-soft hover:border-brand-orange/40"
                 >
                   {s.logoUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -63,13 +63,13 @@ export function SponsorGrid({ sponsors }: { sponsors: Sponsor[] }) {
                       src={s.logoUrl}
                       alt={s.name}
                       className={cn(
-                        "object-contain max-w-full grayscale opacity-80 transition group-hover:grayscale-0 group-hover:opacity-100",
+                        "object-contain max-w-full opacity-80 transition group-hover:opacity-100",
                         TIER_SIZE[tier],
                       )}
                       loading="lazy"
                     />
                   ) : (
-                    <span className="font-display text-xl">{s.name}</span>
+                    <span className="font-display text-xl text-ink">{s.name}</span>
                   )}
                 </a>
               </li>

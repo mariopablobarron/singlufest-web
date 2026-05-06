@@ -21,13 +21,13 @@ export function VideoWall({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="group relative overflow-hidden rounded-2xl border border-line bg-brand-night transition-all hover:border-brand-orange/60 hover:shadow-glow"
+          className="group relative overflow-hidden rounded-2xl border border-ink/10 bg-bg-alt transition-all hover:border-brand-orange/60 hover:shadow-glow"
         >
           <VideoEmbed url={it.url} title={it.title} />
           {(it.title || it.caption) && (
             <figcaption className="p-4">
               {it.title && (
-                <p className="font-display text-lg text-brand-cream group-hover:text-brand-orange transition-colors">
+                <p className="font-display text-lg text-ink group-hover:text-brand-orange transition-colors">
                   {it.title}
                 </p>
               )}

@@ -82,7 +82,7 @@ export default async function HomePage() {
             <Reveal key={title} delay={i * 0.05}>
               <div className="card-elevated h-full transition-all hover:border-brand-orange/40 hover:shadow-glow">
                 <Icon className="w-8 h-8 text-brand-orange" aria-hidden />
-                <h3 className="mt-5 text-2xl md:text-3xl font-display tracking-tight text-brand-cream">{title}</h3>
+                <h3 className="mt-5 text-2xl md:text-3xl font-display tracking-tight text-ink">{title}</h3>
                 <p className="mt-2 text-ink-muted text-pretty">{body}</p>
               </div>
             </Reveal>
@@ -155,7 +155,7 @@ export default async function HomePage() {
                       ? new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "short" }).format(p.publishedAt)
                       : "Borrador"}
                   </p>
-                  <h3 className="mt-4 text-2xl md:text-3xl font-display tracking-tight text-brand-cream group-hover:text-brand-orange transition-colors">
+                  <h3 className="mt-4 text-2xl md:text-3xl font-display tracking-tight text-ink group-hover:text-brand-orange transition-colors">
                     {p.title}
                   </h3>
                   {p.excerpt && (
@@ -168,8 +168,8 @@ export default async function HomePage() {
         </Section>
       )}
 
-      <section className="relative py-24 md:py-32 overflow-hidden border-t border-line">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-ember opacity-80" />
+      <section className="relative py-24 md:py-32 overflow-hidden border-t border-ink/10 bg-bg-alt/60">
+        <div aria-hidden className="absolute inset-0 -z-10 bg-ember opacity-90" />
         <div className="container max-w-4xl text-center relative">
           <p className="badge !text-brand-orange !border-brand-orange/40">Reserva tu plaza</p>
           <h2 className="mt-6 text-display-md text-balance">
