@@ -1,0 +1,47 @@
+# deps
+node_modules
+.pnp
+.pnp.js
+
+# build
+.next
+out
+dist
+build
+
+# env
+.env
+.env.local
+.env.production
+.env.*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# editor
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# next
+next-env.d.ts
+
+# prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# tsconfig builds
+*.tsbuildinfo
+
+# uploads (run-time)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# agents output
+agents/**/output/
+agents/**/cache/

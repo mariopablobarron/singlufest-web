@@ -1,0 +1,223 @@
+// Singlufest — schema inicial.
+// Convención: todos los `id` son cuid(), timestamps en UTC.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  STAFF
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  WAITLIST
+}
+
+enum SponsorTier {
+  DIAMOND
+  GOLD
+  SILVER
+  BRONZE
+  COLLAB
+}
+
+enum PostStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum EventKind {
+  SHOWCOOKING
+  CHARLA
+  CATA
+  TALLER
+  CONCIERTO
+  MERCADO
+  OTRO
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String
+  role          Role      @default(EDITOR)
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  posts         Post[]
+  edition       Edition[] @relation("EditionCreatedBy")
+}
+
+model Edition {
+  id          String   @id @default(cuid())
+  year        Int      @unique
+  slug        String   @unique
+  title       String
+  subtitle    String?
+  startsAt    DateTime?
+  endsAt      DateTime?
+  venue       String?
+  address     String?
+  city        String   @default("Granada")
+  country     String   @default("España")
+  description String?  @db.Text
+  isCurrent   Boolean  @default(false)
+  isPublished Boolean  @default(false)
+  createdById String?
+  createdBy   User?    @relation("EditionCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  events      Event[]
+  reservations Reservation[]
+  sponsors    Sponsor[]
+}
+
+model Event {
+  id          String     @id @default(cuid())
+  editionId   String
+  edition     Edition    @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  slug        String
+  title       String
+  kind        EventKind  @default(OTRO)
+  startsAt    DateTime
+  endsAt      DateTime?
+  venue       String?
+  capacity    Int?
+  priceCents  Int        @default(0) // 0 = gratis
+  description String?    @db.Text
+  coverUrl    String?
+  speaker     String?
+  isPublished Boolean    @default(false)
+  order       Int        @default(0)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  reservations Reservation[]
+
+  @@unique([editionId, slug])
+  @@index([startsAt])
+}
+
+model Reservation {
+  id          String            @id @default(cuid())
+  editionId   String
+  edition     Edition           @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  eventId     String?
+  event       Event?            @relation(fields: [eventId], references: [id], onDelete: SetNull)
+
+  name        String
+  email       String
+  phone       String?
+  partySize   Int               @default(1)
+  dietary     String?           // alergias adicionales (lactosa, frutos secos…)
+  notes       String?           @db.Text
+  status      ReservationStatus @default(PENDING)
+  source      String?           // web | instagram | telefono | otro
+  ipHash      String?
+  userAgent   String?
+  emailedAt   DateTime?
+  cancelledAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([editionId, status])
+  @@index([email])
+}
+
+model Sponsor {
+  id          String       @id @default(cuid())
+  editionId   String?
+  edition     Edition?     @relation(fields: [editionId], references: [id], onDelete: SetNull)
+  name        String
+  slug        String       @unique
+  logoUrl     String?
+  websiteUrl  String?
+  description String?      @db.Text
+  tier        SponsorTier  @default(BRONZE)
+  order       Int          @default(0)
+  isPublished Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([tier, order])
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  excerpt     String?    @db.Text
+  contentMdx  String     @db.Text
+  coverUrl    String?
+  tags        String[]   @default([])
+  authorId    String?
+  author      User?      @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  status      PostStatus @default(DRAFT)
+  scheduledAt DateTime?
+  publishedAt DateTime?
+  seoTitle    String?
+  seoDescription String? @db.Text
+  ogImageUrl  String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+model SiteSettings {
+  id              String   @id @default(cuid())
+  singleton       Boolean  @default(true) @unique // siempre true; fuerza una única fila
+  festivalName    String   @default("Singlufest")
+  tagline         String   @default("El festival sin gluten de Granada")
+  contactEmail    String   @default("hola@singlufest.es")
+  instagramUrl    String   @default("https://www.instagram.com/singlufest/")
+  youtubeUrl      String?
+  tiktokUrl       String?
+  newsletterUrl   String?
+  heroVideoUrl    String?
+  heroPosterUrl   String?
+  bookingsOpen    Boolean  @default(false)
+  metaTitle       String   @default("Singlufest — Festival Sin Gluten de Granada")
+  metaDescription String   @default("Showcookings, charlas, catas y mercado. Granada celebra la cocina sin gluten.")
+  ogImageUrl      String?
+  updatedAt       DateTime @updatedAt
+}
+
+model EmailSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String?
+  consent   Boolean  @default(true)
+  unsubscribedAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+model AgentRun {
+  id        String   @id @default(cuid())
+  agent     String   // "redactor" | "analista" | "video-builder"
+  status    String   // "ok" | "error"
+  costUsd   Float?
+  tokensIn  Int?
+  tokensOut Int?
+  output    String?  @db.Text
+  errorMsg  String?  @db.Text
+  ranAt     DateTime @default(now())
+
+  @@index([agent, ranAt])
+}

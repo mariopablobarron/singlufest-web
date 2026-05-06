@@ -1,0 +1,76 @@
+name: singlufest
+
+services:
+  singlufest-db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: singlufest
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      POSTGRES_DB: singlufest
+    volumes:
+      - singlufest-pgdata:/var/lib/postgresql/data
+    networks: [singlufest-internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U singlufest -d singlufest"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  singlufest-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: singlufest-app:latest
+    restart: unless-stopped
+    depends_on:
+      singlufest-db: { condition: service_healthy }
+    environment:
+      DATABASE_URL: "postgresql://singlufest:${DB_PASSWORD}@singlufest-db:5432/singlufest?schema=public"
+      AUTH_SECRET: ${AUTH_SECRET:?set AUTH_SECRET}
+      AUTH_URL: ${AUTH_URL:-https://singlufest.hubstartidea.es}
+      NEXTAUTH_URL: ${AUTH_URL:-https://singlufest.hubstartidea.es}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-Singlufest <hola@singlufest.hubstartidea.es>}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      CRON_SECRET: ${CRON_SECRET:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-haiku-4-5-20251001}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+      NEXT_PUBLIC_UMAMI_SCRIPT_URL: ${NEXT_PUBLIC_UMAMI_SCRIPT_URL:-https://analytics.hubstartidea.es/script.js}
+      NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${NEXT_PUBLIC_UMAMI_WEBSITE_ID:-}
+      HOSTNAME: 0.0.0.0
+      PORT: 3000
+      NODE_ENV: production
+    volumes:
+      - singlufest-uploads:/app/public/uploads
+    networks: [singlufest-internal, coolify]
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=coolify
+      # HTTPS router
+      - traefik.http.routers.singlufest.rule=Host(`singlufest.hubstartidea.es`)
+      - traefik.http.routers.singlufest.entrypoints=websecure
+      - traefik.http.routers.singlufest.tls=true
+      - traefik.http.routers.singlufest.tls.certresolver=letsencrypt
+      - traefik.http.services.singlufest.loadbalancer.server.port=3000
+      # HTTP→HTTPS redirect (middleware con prefijo del proyecto)
+      - traefik.http.routers.singlufest-http.rule=Host(`singlufest.hubstartidea.es`)
+      - traefik.http.routers.singlufest-http.entrypoints=web
+      - traefik.http.routers.singlufest-http.middlewares=singlufest-redirect
+      - traefik.http.middlewares.singlufest-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.singlufest-redirect.redirectscheme.permanent=true
+
+networks:
+  singlufest-internal:
+    driver: bridge
+  coolify:
+    external: true
+
+volumes:
+  singlufest-pgdata:
+  singlufest-uploads:

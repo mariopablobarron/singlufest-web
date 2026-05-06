@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tema base: oscuro festival andaluz.
+ * Variables como `--bg: R G B` (sin coma) para que Tailwind aplique alpha:
+ *   bg-bg/40 → rgb(var(--bg) / 0.4)
+ */
+:root {
+  --bg: 10 8 7;
+  --bg-alt: 20 16 14;
+  --bg-inverse: 251 233 214;
+  --ink: 251 233 214;
+  --ink-muted: 201 183 156;
+  --ink-inverse: 10 8 7;
+  --accent: 232 93 31;
+  --accent-soft: 255 122 61;
+  --accent-deep: 194 68 18;
+  --accent-contrast: 10 8 7;
+  --line: 251 233 214 / 0.10;
+
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Almendra SC", "Cormorant Garamond", serif;
+  --font-script: "Pirata One", "Almendra SC", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.light {
+  --bg: 255 246 233;
+  --bg-alt: 251 233 214;
+  --bg-inverse: 10 8 7;
+  --ink: 27 16 10;
+  --ink-muted: 107 90 75;
+  --ink-inverse: 251 233 214;
+  --accent: 194 68 18;
+  --accent-soft: 232 93 31;
+  --accent-deep: 142 46 8;
+  --accent-contrast: 255 246 233;
+  --line: 10 8 7 / 0.10;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    background: rgb(var(--bg));
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+  }
+  ::selection { background: rgb(var(--accent)); color: rgb(var(--bg)); }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+    font-feature-settings: "liga", "dlig", "calt", "swsh";
+  }
+}
+
+@layer components {
+  .container-tight { @apply container max-w-5xl; }
+  .container-wide  { @apply container max-w-7xl; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide uppercase transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn text-brand-cream bg-brand-night border border-brand-orange/40 hover:bg-brand-ember hover:border-brand-orange hover:shadow-glow;
+  }
+  .btn-accent {
+    @apply btn bg-brand-orange text-brand-ink shadow-[0_4px_20px_-4px_rgba(232,93,31,0.6)] hover:bg-brand-tangerine hover:shadow-[0_8px_28px_-4px_rgba(255,122,61,0.7)] hover:-translate-y-0.5;
+  }
+  .btn-ghost   { @apply btn bg-transparent text-ink hover:bg-bg-alt; }
+  .btn-outline { @apply btn border border-line text-ink hover:bg-bg-alt hover:border-brand-orange/60; }
+  .btn-lg      { @apply px-7 py-3.5 text-sm; }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted;
+    font-family: var(--font-sans);
+  }
+
+  .card {
+    @apply rounded-2xl border border-line p-6 backdrop-blur-sm;
+    background: rgb(var(--bg-alt) / 0.4);
+  }
+  .card-elevated {
+    @apply card shadow-soft;
+    background: linear-gradient(180deg, rgba(31, 22, 16, 0.55) 0%, rgba(20, 16, 14, 0.45) 100%);
+  }
+
+  .field-label {
+    @apply block text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted;
+  }
+  .field-input {
+    @apply mt-1.5 block w-full rounded-xl border-line px-4 py-3 text-base text-ink focus:border-accent focus:ring-2 focus:ring-accent/30;
+    background: rgb(var(--bg) / 0.7);
+  }
+  .field-input::placeholder { color: rgb(var(--ink-muted) / 0.5); }
+  .field-error {
+    @apply mt-1.5 text-xs text-brand-tangerine;
+  }
+
+  .hairline { @apply h-px w-full bg-line; }
+
+  .ornament {
+    @apply flex items-center gap-3 text-accent;
+    font-family: var(--font-display);
+  }
+  .ornament::before, .ornament::after {
+    content: "";
+    @apply h-px flex-1 bg-gradient-to-r from-transparent via-brand-orange/40 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+
+  .bg-festival {
+    background-image:
+      radial-gradient(1100px 600px at 10% -10%, rgba(232,93,31,0.20), transparent 60%),
+      radial-gradient(900px 600px at 100% 30%, rgba(212,162,58,0.12), transparent 60%),
+      radial-gradient(900px 700px at 30% 110%, rgba(232,93,31,0.12), transparent 60%);
+  }
+
+  .bg-grain::after {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .glow-orange {
+    text-shadow: 0 0 20px rgba(232,93,31,0.45), 0 0 50px rgba(232,93,31,0.25);
+  }
+}
