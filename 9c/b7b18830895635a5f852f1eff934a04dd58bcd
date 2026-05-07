@@ -1,0 +1,25 @@
+agents/redactor/run.ts
+  s_2973c3e7d39dce::t_c419462b65a410 56,59
+agents/analista/run.ts
+  s_2973c3e7d39dce::t_e9aa40e7cde599 62,64
+app/admin/(panel)/agentes/page.tsx
+  s_2973c3e7d39dce::t_5306bcdcd59642 63,76-88
+  s_2973c3e7d39dce::t_3b87b932aaa486 98,104-107
+  s_2973c3e7d39dce::t_5ac8efff2cbfe4 3,12-16,23-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "9cb7b18830895635a5f852f1eff934a04dd58bcd",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
