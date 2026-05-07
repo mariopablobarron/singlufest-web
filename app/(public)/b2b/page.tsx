@@ -72,7 +72,7 @@ export default function B2BPage() {
       {/* HERO */}
       <ThemedSection className="pt-24 md:pt-32 pb-12 relative overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10 bg-festival" />
-        <div className="container max-w-6xl">
+        <div className="container">
           <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center">
             <div>
               <p className="badge mb-6">Dossier · Partners 2026</p>
@@ -113,7 +113,7 @@ export default function B2BPage() {
 
       {/* STATS GRID */}
       <ThemedSection alt className="py-20 md:py-24">
-        <div className="container max-w-6xl">
+        <div className="container">
           <p className="badge mb-6">Por qué SingluFest</p>
           <h2 className="text-display-md text-balance">
             Comunidad pequeña pero con bolsillo grande.
@@ -137,7 +137,7 @@ export default function B2BPage() {
 
       {/* 3 CAMINOS — interactivo */}
       <ThemedSection className="py-24 md:py-32" id="caminos">
-        <div className="container max-w-6xl mb-12">
+        <div className="container mb-12">
           <p className="badge mb-6">Tres caminos</p>
           <h2 className="text-display-lg text-balance">
             Escoge cómo quieres
@@ -160,7 +160,7 @@ export default function B2BPage() {
 
       {/* TESTIMONIALS */}
       <ThemedSection className="py-20 md:py-24">
-        <div className="container max-w-6xl">
+        <div className="container">
           <p className="badge mb-6">Lo que dicen los que ya entraron</p>
           <h2 className="text-display-md text-balance">
             Voces de partners 2025.

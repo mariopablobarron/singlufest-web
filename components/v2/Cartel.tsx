@@ -142,7 +142,7 @@ const CANDIDATES: Candidate[] = [
 export function CartelV2() {
   return (
     <ThemedSection alt className="py-24 md:py-32" id="cartel">
-      <div className="container max-w-7xl">
+      <div className="container">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <p className="badge mb-4">Concurso 2026</p>
@@ -206,7 +206,7 @@ export function CartelV2() {
         </ul>
 
         {/* Resto — grid 4 columnas, más compacto */}
-        <ul className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <ul className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 3xl:grid-cols-5 4k:grid-cols-6">
           {CANDIDATES.slice(3).map((c) => (
             <li key={c.number}>
               <Link href={`/partner/${c.slug}`} className="group block">

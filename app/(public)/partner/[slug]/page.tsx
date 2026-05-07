@@ -75,7 +75,7 @@ export default async function PartnerPage({ params }: { params: Params }) {
   return (
     <>
       <ThemedSection className="pt-24 md:pt-28 pb-10">
-        <div className="container max-w-6xl">
+        <div className="container">
           <Link href="/cartel" className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-brand-orange transition-colors">
             <ArrowLeft className="w-4 h-4" />
             volver al cartel
@@ -84,7 +84,7 @@ export default async function PartnerPage({ params }: { params: Params }) {
       </ThemedSection>
 
       <ThemedSection className="pb-16 md:pb-24">
-        <div className="container max-w-6xl grid gap-10 lg:grid-cols-[1fr_1fr] items-center">
+        <div className="container grid gap-10 lg:grid-cols-[1fr_1fr] items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.22em] text-ink-muted mb-3">{p.chef}</p>
             <h1 className="text-display-xl h-brutal text-ink">{p.dish}</h1>

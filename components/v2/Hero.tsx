@@ -29,7 +29,7 @@ export function HeroV2({
       <div aria-hidden className="absolute inset-0 -z-10 bg-festival" />
       <div aria-hidden className="absolute top-20 -right-32 w-[60rem] h-[60rem] rounded-full bg-brand-orange/10 blur-3xl -z-10" />
 
-      <div className="container max-w-7xl grid lg:grid-cols-[1.15fr_1fr] gap-12 items-center">
+      <div className="container grid md:grid-cols-[1.15fr_1fr] gap-8 md:gap-12 lg:gap-16 items-center">
         {/* Columna izquierda — texto */}
         <div className="relative">
           <div className="mb-8 flex flex-wrap items-center gap-3">
@@ -107,7 +107,7 @@ export function HeroV2({
       </div>
 
       {/* Tira inferior con KPIs */}
-      <div className="container max-w-7xl mt-20 md:mt-28">
+      <div className="container mt-20 md:mt-28">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
           {[
             { kpi: "12", label: "candidatos en concurso" },

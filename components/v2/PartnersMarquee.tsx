@@ -72,7 +72,7 @@ export async function PartnersMarqueeV2() {
 
   return (
     <ThemedSection alt className="py-20 md:py-24 overflow-hidden">
-      <div className="container max-w-7xl mb-10">
+      <div className="container mb-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="badge mb-3">Partners & Colaboradores</p>

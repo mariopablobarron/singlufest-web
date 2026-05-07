@@ -8,10 +8,38 @@ const config: Config = {
   ],
   darkMode: "class",
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+      "3xl": "1920px", // FullHD TV
+      "4k": "2560px",  // 2K monitor
+      "5k": "3840px",  // 4K TV
+    },
     container: {
       center: true,
-      padding: { DEFAULT: "1rem", md: "2rem" },
-      screens: { "2xl": "1320px" },
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.25rem",
+        md: "2rem",
+        lg: "2.5rem",
+        xl: "3rem",
+        "2xl": "4rem",
+        "3xl": "5rem",
+        "4k": "6rem",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1480px",
+        "3xl": "1760px",
+        "4k": "2200px",
+        "5k": "3000px",
+      },
     },
     extend: {
       colors: {
@@ -58,10 +86,11 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       fontSize: {
-        "display-xl": ["clamp(4rem, 11vw, 9rem)", { lineHeight: "0.9", letterSpacing: "-0.02em", fontWeight: "400" }],
-        "display-lg": ["clamp(3rem, 7.5vw, 6.5rem)", { lineHeight: "0.92", letterSpacing: "-0.015em", fontWeight: "400" }],
-        "display-md": ["clamp(2rem, 4.5vw, 3.75rem)", { lineHeight: "0.96", letterSpacing: "-0.01em", fontWeight: "400" }],
-        "display-sm": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.05", letterSpacing: "-0.005em", fontWeight: "400" }],
+        // Clamps con techo elevado para que escalen en TV 4K, mínimos generosos en mobile.
+        "display-xl": ["clamp(2.75rem, 9vw, 12rem)", { lineHeight: "0.92", letterSpacing: "-0.02em", fontWeight: "400" }],
+        "display-lg": ["clamp(2.25rem, 7vw, 9rem)", { lineHeight: "0.94", letterSpacing: "-0.015em", fontWeight: "400" }],
+        "display-md": ["clamp(1.75rem, 4.5vw, 5.5rem)", { lineHeight: "0.98", letterSpacing: "-0.01em", fontWeight: "400" }],
+        "display-sm": ["clamp(1.35rem, 3vw, 3rem)", { lineHeight: "1.05", letterSpacing: "-0.005em", fontWeight: "400" }],
       },
       backgroundImage: {
         "spotlight": "radial-gradient(ellipse at top, rgba(232,93,31,0.18), transparent 55%)",

@@ -33,7 +33,7 @@ const SEALS = [
 export function ProtocolV2() {
   return (
     <ThemedSection alt className="py-28 md:py-36">
-      <div className="container max-w-6xl">
+      <div className="container">
         <p className="badge mb-6">Seguridad</p>
         <h2 className="text-display-lg text-balance">
           Cero trazas.

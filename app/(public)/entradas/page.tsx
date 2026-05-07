@@ -25,7 +25,7 @@ export default function EntradasPage() {
       <TicketsV2 />
 
       <ThemedSection alt className="py-20 md:py-24">
-        <div className="container max-w-6xl">
+        <div className="container">
           <p className="badge mb-6">Add-ons disponibles</p>
           <h2 className="text-display-md text-balance">
             Sube tu experiencia.

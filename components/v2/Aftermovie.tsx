@@ -5,7 +5,7 @@ import { ThemedSection } from "./SectionTheme";
 export function AftermovieV2({ videoUrl }: { videoUrl?: string }) {
   return (
     <ThemedSection alt className="py-24 md:py-32 overflow-hidden">
-      <div className="container max-w-6xl">
+      <div className="container">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
           <div>
             <p className="badge mb-4">Edición 2025</p>

@@ -10,7 +10,7 @@ const REELS_PLACEHOLDER = Array.from({ length: 6 }).map((_, i) => ({
 export function SocialWallV2() {
   return (
     <ThemedSection className="py-24 md:py-32">
-      <div className="container max-w-6xl">
+      <div className="container">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
           <div>
             <p className="badge mb-4 inline-flex items-center gap-1.5">

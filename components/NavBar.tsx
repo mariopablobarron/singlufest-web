@@ -27,7 +27,7 @@ export function NavBar() {
           : "bg-transparent",
       )}
     >
-      <div className="container max-w-7xl flex items-center justify-between h-16 md:h-20">
+      <div className="container flex items-center justify-between h-16 md:h-20">
         <Link href="/" aria-label="Inicio Singlufest" className="flex items-center">
           <Logo />
         </Link>
@@ -60,7 +60,7 @@ export function NavBar() {
 
       {open && (
         <div className="md:hidden border-t border-line bg-bg/95 backdrop-blur-md">
-          <nav className="container max-w-7xl py-4 flex flex-col gap-1">
+          <nav className="container py-4 flex flex-col gap-1">
             {SITE.nav.map((item) => (
               <Link
                 key={item.href}

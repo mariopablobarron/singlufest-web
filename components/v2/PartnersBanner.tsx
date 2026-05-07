@@ -18,7 +18,7 @@ export async function PartnersBannerV2() {
 
   return (
     <ThemedSection theme="papel" className="py-20 md:py-24 border-t border-line">
-      <div className="container max-w-6xl">
+      <div className="container">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
           <div>
             <p className="badge mb-3">Ellos hacen posible el festival</p>

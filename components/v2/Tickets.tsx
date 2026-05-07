@@ -70,7 +70,7 @@ const TIERS: Tier[] = [
 export function TicketsV2() {
   return (
     <ThemedSection className="py-28 md:py-36" id="entradas">
-      <div className="container max-w-6xl">
+      <div className="container">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <p className="badge mb-4">Entradas · Last release</p>

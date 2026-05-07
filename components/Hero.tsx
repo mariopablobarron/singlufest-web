@@ -22,7 +22,7 @@ export function Hero({
     <section className="relative isolate overflow-hidden pt-20 md:pt-28 pb-28 md:pb-40">
       <HeroOrnaments />
 
-      <div className="container max-w-7xl text-center relative">
+      <div className="container text-center relative">
         <HeroBadge edition={edition} />
 
         {showLogo ? (

@@ -84,7 +84,7 @@
 
 @layer components {
   .container-tight { @apply container max-w-5xl; }
-  .container-wide  { @apply container max-w-7xl; }
+  .container-wide  { @apply container; }
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold tracking-[0.12em] uppercase transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-50;

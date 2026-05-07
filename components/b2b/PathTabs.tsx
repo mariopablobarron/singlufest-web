@@ -198,7 +198,7 @@ export function PathTabs() {
   const data = TIERS[active];
 
   return (
-    <div className="container max-w-6xl">
+    <div className="container">
       {/* Tabs */}
       <div className="grid gap-3 md:grid-cols-3 mb-12">
         {(Object.keys(TIERS) as Path[]).map((p) => {
