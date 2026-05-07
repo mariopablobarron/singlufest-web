@@ -34,7 +34,7 @@ export function HeroV2({
         <div className="relative">
           <div className="mb-8 flex flex-wrap items-center gap-3">
             <span className="badge-hot">⚡ {edition}</span>
-            <span className="badge !text-brand-orange !border-brand-orange/40">Sold out 2025</span>
+            <span className="badge !text-brand-orange !border-brand-orange/40">Primera edición</span>
           </div>
 
           {showLogo ? (

@@ -3,40 +3,23 @@ import { ThemedSection } from "@/components/v2/SectionTheme";
 import { PathTabs } from "@/components/b2b/PathTabs";
 import { RoiCalculator } from "@/components/b2b/RoiCalculator";
 import { B2BForm } from "@/components/b2b/B2BForm";
-import { TrendingUp, Users, Newspaper, Heart, Camera, Zap, ChartNoAxesCombined, Globe2 } from "lucide-react";
+import { TrendingUp, Users, Newspaper, Heart, Camera, Zap, Target, Globe2 } from "lucide-react";
 
 export const metadata = {
   title: "Dossier de partners",
   description: "Patrocinadores, colaboradores y embajadores: cómo unirte al SingluFest 2026 y qué te llevas a cambio.",
 };
 
-const STATS_2025 = [
-  { icon: Users, label: "asistentes únicos", value: "5.200" },
-  { icon: TrendingUp, label: "tickets vendidos", value: "8.700" },
-  { icon: Camera, label: "menciones en redes", value: "2,1M" },
-  { icon: Newspaper, label: "menciones en prensa", value: "23" },
-  { icon: Heart, label: "votos del público", value: "12.408" },
-  { icon: Zap, label: "AOV add-ons", value: "+24€" },
-  { icon: ChartNoAxesCombined, label: "índice satisfacción", value: "9,2/10" },
-  { icon: Globe2, label: "comunidades activadas", value: "7" },
-];
-
-const TESTIMONIALS = [
-  {
-    quote: "Pasamos de ser una marca de nicho a tener cola en la puerta del local durante un mes. El SingluFest nos puso en el mapa.",
-    author: "Kim, KIMCAKES",
-    role: "Headliner 2025",
-  },
-  {
-    quote: "Como restaurante, ganamos 80 reservas la semana posterior. Y tenemos una lista de espera para 2026 que nunca habíamos imaginado.",
-    author: "Carmela",
-    role: "Headliner 2025",
-  },
-  {
-    quote: "Activamos campaña de marca con un creator del festival. Engagement +320% vs nuestra media. Repetimos seguro.",
-    author: "Marca colaboradora premium",
-    role: "Patrocinador Oro 2025",
-  },
+// Objetivos para la primera edición. Cuando pase, sustituimos por datos reales auditados.
+const TARGETS_2026 = [
+  { icon: Users, label: "asistentes objetivo", value: "3.000+" },
+  { icon: TrendingUp, label: "tickets en venta", value: "5.000" },
+  { icon: Camera, label: "alcance redes objetivo", value: "1M+" },
+  { icon: Newspaper, label: "menciones prensa target", value: "15+" },
+  { icon: Heart, label: "comunidad celíaca activa", value: "+50k" },
+  { icon: Zap, label: "AOV con add-ons", value: "+24€" },
+  { icon: Target, label: "candidatos en concurso", value: "12" },
+  { icon: Globe2, label: "ciudades convocatoria", value: "8" },
 ];
 
 const FAQS = [
@@ -93,17 +76,17 @@ export default function B2BPage() {
 
             <div className="relative">
               <div className="rounded-3xl bg-brand-carbon text-brand-bone p-8 md:p-10 grain relative overflow-hidden shadow-[0_30px_60px_-20px_rgba(11,8,7,0.4)]">
-                <p className="badge !text-brand-orange !border-brand-orange/40 mb-6">Edición 2025 · highlights</p>
+                <p className="badge !text-brand-orange !border-brand-orange/40 mb-6">Edición piloto 2026 · objetivos</p>
                 <ul className="space-y-3 text-brand-bone/90">
-                  <li className="flex justify-between"><span>Asistentes únicos</span> <strong className="text-brand-orange">5.200</strong></li>
-                  <li className="flex justify-between"><span>Sold out en</span> <strong className="text-brand-orange">3 semanas</strong></li>
-                  <li className="flex justify-between"><span>Reach en redes</span> <strong className="text-brand-orange">2,1M</strong></li>
-                  <li className="flex justify-between"><span>Asistencia VIP</span> <strong className="text-brand-orange">98%</strong></li>
-                  <li className="flex justify-between"><span>Net Promoter Score</span> <strong className="text-brand-orange">+72</strong></li>
+                  <li className="flex justify-between"><span>Días de festival</span> <strong className="text-brand-orange">14-16 nov</strong></li>
+                  <li className="flex justify-between"><span>Candidatos en concurso</span> <strong className="text-brand-orange">12</strong></li>
+                  <li className="flex justify-between"><span>Aforo objetivo</span> <strong className="text-brand-orange">3.000+</strong></li>
+                  <li className="flex justify-between"><span>Cabezas de cartel ya cerrados</span> <strong className="text-brand-orange">2</strong></li>
+                  <li className="flex justify-between"><span>Ubicación</span> <strong className="text-brand-orange">Granada</strong></li>
                 </ul>
                 <hr className="my-6 border-brand-bone/15" />
                 <p className="text-sm text-brand-bone/75">
-                  Reporte completo auditado disponible bajo solicitud para potenciales partners.
+                  Es la primera edición. Si entras como partner, eres uno de los pioneros que define el ADN del festival.
                 </p>
               </div>
             </div>
@@ -111,7 +94,7 @@ export default function B2BPage() {
         </div>
       </ThemedSection>
 
-      {/* STATS GRID */}
+      {/* TARGETS GRID */}
       <ThemedSection alt className="py-20 md:py-24">
         <div className="container">
           <p className="badge mb-6">Por qué SingluFest</p>
@@ -124,7 +107,7 @@ export default function B2BPage() {
           </p>
 
           <ul className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {STATS_2025.map(({ icon: Icon, label, value }) => (
+            {TARGETS_2026.map(({ icon: Icon, label, value }) => (
               <li key={label} className="rounded-2xl border border-ink/10 bg-bg p-5">
                 <Icon className="w-6 h-6 text-brand-orange" />
                 <p className="mt-3 h-brutal text-3xl text-ink">{value}</p>
@@ -132,6 +115,9 @@ export default function B2BPage() {
               </li>
             ))}
           </ul>
+          <p className="mt-6 text-xs text-ink-muted italic">
+            Objetivos de la primera edición (14-16 noviembre 2026). Tras el evento, sustituimos por datos reales auditados.
+          </p>
         </div>
       </ThemedSection>
 
@@ -158,24 +144,28 @@ export default function B2BPage() {
         </div>
       </ThemedSection>
 
-      {/* TESTIMONIALS */}
+      {/* PORQUE PIONERO */}
       <ThemedSection className="py-20 md:py-24">
-        <div className="container">
-          <p className="badge mb-6">Lo que dicen los que ya entraron</p>
+        <div className="container max-w-4xl">
+          <p className="badge mb-6">Eres pionero</p>
           <h2 className="text-display-md text-balance">
-            Voces de partners 2025.
+            Esto es la primera edición.
+            <span className="block h-script text-brand-orange mt-2">y los que entren ahora se quedan en la historia.</span>
           </h2>
-          <ul className="mt-12 grid gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <li key={t.author} className="card-elevated">
-                <span className="h-brutal text-5xl text-brand-orange leading-none">"</span>
-                <p className="mt-2 text-ink/90 text-pretty">{t.quote}</p>
-                <hr className="my-5 hairline" />
-                <p className="font-display text-lg text-ink">{t.author}</p>
-                <p className="text-xs uppercase tracking-[0.18em] text-ink-muted">{t.role}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="card-elevated">
+              <p className="h-brutal text-3xl text-brand-orange">+50k</p>
+              <p className="mt-2 text-sm text-ink-muted">celíacos activos en redes en España. Comunidad hambrienta de comida buena de verdad.</p>
+            </div>
+            <div className="card-elevated">
+              <p className="h-brutal text-3xl text-brand-orange">0</p>
+              <p className="mt-2 text-sm text-ink-muted">ferias premium 100% sin gluten en España. Llegáis al hueco con tu marca antes que nadie.</p>
+            </div>
+            <div className="card-elevated">
+              <p className="h-brutal text-3xl text-brand-orange">3 días</p>
+              <p className="mt-2 text-sm text-ink-muted">de evento + 60 días de comunicación pre y post. Más exposición de la que parece.</p>
+            </div>
+          </div>
         </div>
       </ThemedSection>
 

@@ -58,7 +58,7 @@ const TIERS: Tier[] = [
     bg: "bg-brand-carbon text-brand-bone",
     perks: [
       "Todo lo del VIP",
-      "Cena de 6 platos con el ganador 2025",
+      "Cena de 6 platos con un chef invitado",
       "Botella firmada y numerada",
       "Meet & greet con los headliners",
       "Voto premium (cuenta x3)",

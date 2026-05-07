@@ -27,7 +27,7 @@ const CANDIDATES: Candidate[] = [
     description: "Cheesecake volcánico, almendra tostada y caramelo de cerveza sin gluten.",
     price: 7,
     bg: "from-brand-orange via-brand-tangerine to-brand-burn",
-    votes: 1284,
+    votes: 0,
     badge: "Headliner",
   },
   {
@@ -38,7 +38,7 @@ const CANDIDATES: Candidate[] = [
     description: "Pan brioche sin gluten relleno de chuletón madurado 60 días y mantequilla ahumada.",
     price: 9,
     bg: "from-brand-wine via-[#9B2A41] to-brand-burn",
-    votes: 1107,
+    votes: 0,
     badge: "Headliner",
   },
   {
@@ -59,7 +59,7 @@ const CANDIDATES: Candidate[] = [
     description: "Croissant de fermentación lenta, hojaldrado a mano. Crujiente real.",
     price: 4,
     bg: "from-brand-lemon via-brand-orange to-brand-burn",
-    votes: 832,
+    votes: 0,
   },
   {
     number: "05",
@@ -69,7 +69,7 @@ const CANDIDATES: Candidate[] = [
     description: "Cerveza artesana 100% sin cebada. Tropical, amarga, peligrosa.",
     price: 5,
     bg: "from-[#F5C56B] via-brand-orange to-brand-burn",
-    votes: 612,
+    votes: 0,
   },
   {
     number: "06",
@@ -79,7 +79,7 @@ const CANDIDATES: Candidate[] = [
     description: "Granada del Albaicín, romero del Sacromonte y ralladura de yuzu.",
     price: 4,
     bg: "from-[#E76F51] via-brand-orange to-[#C24412]",
-    votes: 489,
+    votes: 0,
   },
   {
     number: "07",
@@ -89,7 +89,7 @@ const CANDIDATES: Candidate[] = [
     description: "Pan de masa madre 100% sin gluten. Corteza dura, miga aireada. Imposible distinguirlo.",
     price: 6,
     bg: "from-[#CE7C2D] via-brand-orange to-brand-burn",
-    votes: 401,
+    votes: 0,
   },
   {
     number: "08",
@@ -99,7 +99,7 @@ const CANDIDATES: Candidate[] = [
     description: "Fermentado andaluz, picante medio, con tostada de teff. Para los valientes.",
     price: 5,
     bg: "from-[#A4243B] via-brand-wine to-brand-burn",
-    votes: 287,
+    votes: 0,
   },
   {
     number: "09",
@@ -109,7 +109,7 @@ const CANDIDATES: Candidate[] = [
     description: "Huevos rotos sobre teff con bacon ibérico y pan de molde sin gluten.",
     price: 8,
     bg: "from-[#F4A261] via-brand-orange to-[#C24412]",
-    votes: 244,
+    votes: 0,
   },
   {
     number: "10",
@@ -119,7 +119,7 @@ const CANDIDATES: Candidate[] = [
     description: "5 quesos curados de pastor + miel de azahar + crackers de garbanzo.",
     price: 9,
     bg: "from-brand-gold via-brand-orange to-brand-burn",
-    votes: 198,
+    votes: 0,
   },
   {
     number: "11",
@@ -129,7 +129,7 @@ const CANDIDATES: Candidate[] = [
     description: "Vermut de la casa con aceitunas premium y boquerón en vinagre. Sin trampa.",
     price: 4,
     bg: "from-brand-wine via-[#A4243B] to-brand-burn",
-    votes: 156,
+    votes: 0,
   },
   {
     number: "12",
@@ -139,7 +139,7 @@ const CANDIDATES: Candidate[] = [
     description: "Bizcocho de almendra, mascarpone batido, café Colombia. La mejor versión.",
     price: 6,
     bg: "from-[#6B3F2A] via-brand-burn to-brand-carbon",
-    votes: 134,
+    votes: 0,
   },
 ];
 
