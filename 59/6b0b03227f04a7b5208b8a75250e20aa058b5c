@@ -1,0 +1,19 @@
+components/b2b/RoiCalculator.tsx
+  s_2973c3e7d39dce::t_6ca62f0dd50a32 30,35,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "596b0b03227f04a7b5208b8a75250e20aa058b5c",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "unknown"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
