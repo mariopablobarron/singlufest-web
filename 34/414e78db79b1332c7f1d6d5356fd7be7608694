@@ -1,0 +1,41 @@
+components/VoteButton.tsx
+  s_2973c3e7d39dce::t_96208a3edbd475 1-107
+prisma/schema.prisma
+  s_2973c3e7d39dce::t_78a801c6406c39 211-222
+app/api/vote/[slug]/route.ts
+  s_2973c3e7d39dce::t_255ceed4990a52 1-103
+lib/voting.ts
+  s_2973c3e7d39dce::t_e8f5ae93ba5308 1-25
+components/v2/Cartel.tsx
+  s_2973c3e7d39dce::t_e04336a266b3fb 223-229
+  s_2973c3e7d39dce::t_2b0a37d29726ed 146-176
+  s_2973c3e7d39dce::t_8069173ea4021e 2-3,5-7
+  s_2973c3e7d39dce::t_2ced9735aa4067 262-267
+app/admin/(panel)/settings/page.tsx
+  s_2973c3e7d39dce::t_38b4b034fa596f 1,4,6,12-13,15-19,21,26,28,30-35
+  s_2973c3e7d39dce::t_482f1ce158d5b5 81,90,93-95
+  s_2973c3e7d39dce::t_ba8699880b872c 11,14,20,22-25,27,29
+  s_2973c3e7d39dce::t_a774fc8708c7cc 80,82-89,96
+  s_2973c3e7d39dce::t_1b9feec51d5a0d 228-239,245-289
+  s_2973c3e7d39dce::t_f9a10e689af35a 240-244
+app/(public)/partner/[slug]/page.tsx
+  s_2973c3e7d39dce::t_d3d4534a3fd477 3-4,7-9
+  s_2973c3e7d39dce::t_5eaeec25e19285 124-130
+  s_2973c3e7d39dce::t_dcb97c0dae5501 74-93,98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "34414e78db79b1332c7f1d6d5356fd7be7608694",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
