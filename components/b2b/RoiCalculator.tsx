@@ -27,12 +27,12 @@ export function RoiCalculator() {
         <div className="space-y-6">
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-brand-bone/60 mb-3">Tier de patrocinio</p>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
               {(["plata", "oro", "diamante"] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => setTier(t)}
-                  className={`px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-[0.18em] transition-all ${
+                  className={`px-1 sm:px-3 md:px-4 py-2.5 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold uppercase tracking-[0.12em] sm:tracking-[0.18em] truncate transition-all ${
                     tier === t
                       ? "bg-brand-orange text-brand-carbon shadow-[0_12px_30px_-10px_rgba(232,93,31,0.6)]"
                       : "bg-brand-bone/10 text-brand-bone/85 hover:bg-brand-bone/20"
@@ -42,7 +42,7 @@ export function RoiCalculator() {
                 </button>
               ))}
             </div>
-            <p className="mt-2 text-sm text-brand-bone/65">Coste: {cost.toLocaleString("es-ES")}€ · Reach estimado: {reach.toLocaleString("es-ES")}</p>
+            <p className="mt-2 text-xs sm:text-sm text-brand-bone/65">Coste: {cost.toLocaleString("es-ES")}€ · Reach: {reach.toLocaleString("es-ES")}</p>
           </div>
 
           <div>
