@@ -1,0 +1,24 @@
+components/v2/PartnersMarquee.tsx
+  s_2973c3e7d39dce::t_e4c98389111ece 1-101
+scripts/seed.ts
+  s_2973c3e7d39dce::t_739fb102ec52a5 83,85,88,104,109
+app/(public)/page.tsx
+  s_2973c3e7d39dce::t_91b83461562e1e 37
+  s_2973c3e7d39dce::t_6e130a1ada5764 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "e30ef4e16c1dfb7f66596c4ada1fb4324012746d",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
