@@ -1,0 +1,45 @@
+app/(public)/manifiesto/page.tsx
+  s_2973c3e7d39dce::t_b75825863f1dc8 1-95
+app/(public)/cartel/page.tsx
+  s_2973c3e7d39dce::t_9f21be54922e18 1-50
+app/(public)/cookies/page.tsx
+  s_2973c3e7d39dce::t_a51f1576296496 1-49
+components/b2b/B2BForm.tsx
+  s_2973c3e7d39dce::t_e5e85a39e5abb0 1-150
+app/api/b2b/route.ts
+  s_2973c3e7d39dce::t_1b4e82de98d8f5 1-111
+app/(public)/b2b/page.tsx
+  s_2973c3e7d39dce::t_fdeae98a5aebcd 1-247
+app/(public)/aftermovie/page.tsx
+  s_2973c3e7d39dce::t_76d5d150efef90 1-115
+app/(public)/entradas/page.tsx
+  s_2973c3e7d39dce::t_b8fc0fba1e5f3c 1-96
+app/(public)/privacidad/page.tsx
+  s_2973c3e7d39dce::t_b208bf6d2c06f8 1-56
+components/b2b/PathTabs.tsx
+  s_2973c3e7d39dce::t_e5342ffba250fe 1-317
+components/b2b/RoiCalculator.tsx
+  s_2973c3e7d39dce::t_1c0044140e0e8a 1-110
+app/(public)/partner/[slug]/page.tsx
+  s_2973c3e7d39dce::t_0b88e9d894bbab 1-175
+app/(public)/aviso-legal/page.tsx
+  s_2973c3e7d39dce::t_d047c44e217bf5 1-48
+app/(public)/protocolo/page.tsx
+  s_2973c3e7d39dce::t_c0b62e1878edc5 1-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "78de026f84551f71a7b68984ef41705e17422413",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
