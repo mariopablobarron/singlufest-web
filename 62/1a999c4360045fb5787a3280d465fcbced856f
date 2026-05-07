@@ -1,0 +1,25 @@
+scripts/seed.ts
+  s_2973c3e7d39dce::t_c0d06392655814 28-32
+app/(public)/cartel/page.tsx
+  s_2973c3e7d39dce::t_21f6f2f0f36f44 14-18,20-21
+app/(public)/protocolo/page.tsx
+  s_2973c3e7d39dce::t_f7aee1f8d18b21 15-19,21-22
+app/(public)/aftermovie/page.tsx
+  s_2973c3e7d39dce::t_7ac8fcdb17481f 40-44,46-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "621a999c4360045fb5787a3280d465fcbced856f",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
