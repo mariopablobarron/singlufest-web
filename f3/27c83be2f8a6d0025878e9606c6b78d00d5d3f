@@ -1,0 +1,25 @@
+components/LogoClient.tsx
+  s_2973c3e7d39dce::t_2b5e071a7cf8f2 24
+components/v2/Hero.tsx
+  s_2973c3e7d39dce::t_c10430f2d11b68 44-45,47,50
+components/Logo.tsx
+  s_2973c3e7d39dce::t_a4a9c84bc848d2 22
+components/NavBar.tsx
+  s_2973c3e7d39dce::t_9c52717908ff43 30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "f327c83be2f8a6d0025878e9606c6b78d00d5d3f",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
