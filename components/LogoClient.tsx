@@ -21,7 +21,7 @@ export function LogoClient({ className, size = 48 }: { className?: string; size?
         height={size}
         priority
         onError={() => setErrored(true)}
-        className="object-contain h-10 md:h-12 w-auto drop-shadow-[0_0_24px_rgba(232,93,31,0.35)]"
+        className="object-contain h-12 sm:h-14 md:h-16 lg:h-[4.5rem] xl:h-20 3xl:h-24 w-auto drop-shadow-[0_0_24px_rgba(232,93,31,0.35)]"
       />
     </span>
   );

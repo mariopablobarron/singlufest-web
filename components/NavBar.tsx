@@ -27,7 +27,7 @@ export function NavBar() {
           : "bg-transparent",
       )}
     >
-      <div className="container flex items-center justify-between h-16 md:h-20">
+      <div className="container flex items-center justify-between h-20 md:h-24 lg:h-28 xl:h-32 3xl:h-36">
         <Link href="/" aria-label="Inicio Singlufest" className="flex items-center">
           <Logo />
         </Link>

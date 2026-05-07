@@ -41,13 +41,13 @@ export function HeroV2({
             <Image
               src="/brand/logo.png"
               alt="SingluFest"
-              width={260}
-              height={120}
+              width={520}
+              height={240}
               priority
-              className="mb-8 object-contain w-40 md:w-52 h-auto drop-shadow-[0_0_24px_rgba(232,93,31,0.30)]"
+              className="mb-8 md:mb-10 object-contain w-56 sm:w-64 md:w-80 lg:w-[22rem] xl:w-[26rem] 3xl:w-[32rem] h-auto drop-shadow-[0_0_30px_rgba(232,93,31,0.35)]"
             />
           ) : (
-            <LogoTypo className="mb-8 !text-3xl" />
+            <LogoTypo className="mb-8 !text-4xl md:!text-5xl 3xl:!text-6xl" />
           )}
 
           <h1 className="text-display-xl text-balance">
