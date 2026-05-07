@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Almendra_SC, Pirata_One, Manrope, JetBrains_Mono } from "next/font/google";
+import { Anton, Berkshire_Swash, Lobster, Manrope, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { SITE } from "@/lib/site";
@@ -12,17 +12,17 @@ const anton = Anton({
   display: "swap",
 });
 
-// Ornamental art-nouveau (alma del logo).
-const almendra = Almendra_SC({
-  subsets: ["latin"],
+// Display = inspirado en el lettering del logo SingluFest (bold script con swashes art-nouveau).
+const berkshire = Berkshire_Swash({
+  subsets: ["latin", "latin-ext"],
   variable: "--font-display",
   weight: "400",
   display: "swap",
 });
 
-// Script emocional.
-const pirata = Pirata_One({
-  subsets: ["latin"],
+// Script = acento emocional, mismo espíritu vintage que el display.
+const lobster = Lobster({
+  subsets: ["latin", "latin-ext"],
   variable: "--font-script",
   weight: "400",
   display: "swap",
@@ -79,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="es"
-      className={`${manrope.variable} ${anton.variable} ${almendra.variable} ${pirata.variable} ${jetbrains.variable}`}
+      className={`${manrope.variable} ${anton.variable} ${berkshire.variable} ${lobster.variable} ${jetbrains.variable}`}
     >
       <body className="bg-bg text-ink min-h-screen flex flex-col">
         {children}
