@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { Sparkles, Newspaper, BarChart3, Video } from "lucide-react";
+import { Sparkles, Newspaper, BarChart3, Video, KeyRound } from "lucide-react";
 import { runRedactor } from "@/agents/redactor/run";
 import { runAnalista } from "@/agents/analista/run";
 
@@ -9,14 +9,22 @@ export const metadata = { title: "Agentes IA" };
 
 async function lanzarRedactor() {
   "use server";
-  await runRedactor({ trigger: "manual" });
+  try {
+    await runRedactor({ trigger: "manual" });
+  } catch (err) {
+    console.error("[redactor] error", err);
+  }
   revalidatePath("/admin/agentes");
   revalidatePath("/admin/posts");
 }
 
 async function lanzarAnalista() {
   "use server";
-  await runAnalista({ trigger: "manual" });
+  try {
+    await runAnalista({ trigger: "manual" });
+  } catch (err) {
+    console.error("[analista] error", err);
+  }
   revalidatePath("/admin/agentes");
 }
 
@@ -52,6 +60,7 @@ const AGENTES = [
 
 export default async function AgentesAdmin() {
   const runs = await prisma.agentRun.findMany({ orderBy: { ranAt: "desc" }, take: 30 });
+  const apiKeyConfigured = Boolean(process.env.ANTHROPIC_API_KEY);
 
   return (
     <div className="space-y-10">
@@ -64,6 +73,20 @@ export default async function AgentesAdmin() {
         </p>
       </header>
 
+      {!apiKeyConfigured && (
+        <div className="rounded-2xl border border-brand-orange/30 bg-brand-orange/10 p-6 flex items-start gap-4">
+          <KeyRound className="w-6 h-6 text-brand-orange shrink-0 mt-0.5" />
+          <div>
+            <p className="h-brutal text-lg text-ink">Falta ANTHROPIC_API_KEY en el servidor</p>
+            <p className="mt-1 text-sm text-ink-muted text-pretty">
+              Los agentes están deshabilitados hasta que configures la API key.
+              Edita <code className="px-1.5 py-0.5 rounded bg-bg-alt">/data/singlufest-startidea/.env</code> en el VPS, añade tu clave de Anthropic
+              y reinicia el contenedor con <code className="px-1.5 py-0.5 rounded bg-bg-alt">docker compose up -d --force-recreate singlufest-app</code>.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {AGENTES.map((a) => (
           <div key={a.id} className="card-elevated flex flex-col">
@@ -72,12 +95,16 @@ export default async function AgentesAdmin() {
             <p className="mt-2 text-sm text-ink-muted flex-1">{a.description}</p>
             <p className="mt-4 text-xs text-ink-muted"><strong>Cron:</strong> {a.cron}</p>
             <div className="mt-5">
-              {a.action ? (
+              {a.action && apiKeyConfigured ? (
                 <form action={a.action}>
                   <button className="btn-accent w-full">
                     <Sparkles className="w-4 h-4" /> Lanzar ahora
                   </button>
                 </form>
+              ) : a.action && !apiKeyConfigured ? (
+                <button className="btn-outline w-full" disabled title="Falta ANTHROPIC_API_KEY">
+                  Falta API key
+                </button>
               ) : (
                 <button className="btn-outline w-full" disabled>{a.status}</button>
               )}

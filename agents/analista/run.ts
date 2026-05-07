@@ -59,9 +59,9 @@ export async function runAnalista({
   const model = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5-20251001";
   if (!apiKey) {
     await prisma.agentRun.create({
-      data: { agent: "analista", status: "error", errorMsg: "ANTHROPIC_API_KEY no configurada" },
+      data: { agent: "analista", status: "error", errorMsg: "ANTHROPIC_API_KEY no configurada en el .env del servidor" },
     });
-    throw new Error("ANTHROPIC_API_KEY no configurada");
+    return { ok: false as const, error: "ANTHROPIC_API_KEY no configurada en el .env del servidor" };
   }
 
   const stats = await loadStats();

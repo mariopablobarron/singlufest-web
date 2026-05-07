@@ -53,10 +53,10 @@ export async function runRedactor({
       data: {
         agent: "redactor",
         status: "error",
-        errorMsg: "ANTHROPIC_API_KEY no configurada",
+        errorMsg: "ANTHROPIC_API_KEY no configurada en el .env del servidor",
       },
     });
-    throw new Error("ANTHROPIC_API_KEY no configurada");
+    return { ok: false as const, error: "ANTHROPIC_API_KEY no configurada en el .env del servidor" };
   }
 
   const chosenTopic = topic ?? pickTopic();
