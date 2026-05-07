@@ -25,7 +25,11 @@ async function main() {
       role: "ADMIN",
       isActive: true,
     },
-    update: {},
+    // Re-hashea con la pwd actual del .env y reactiva. Si quieres preservar la pwd
+    // existente sin tocarla, usa SEED_PRESERVE_PASSWORD=1.
+    update: process.env.SEED_PRESERVE_PASSWORD === "1"
+      ? {}
+      : { passwordHash, role: "ADMIN", isActive: true },
   });
   console.log("✓ Admin:", admin.email);
 

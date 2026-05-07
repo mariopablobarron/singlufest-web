@@ -37,13 +37,15 @@ const PHOTOS = Array.from({ length: 9 }).map((_, i) => ({
 export default function AftermoviePage() {
   return (
     <>
-      <ThemedSection className="pt-28 md:pt-36 pb-12">
-        <div className="container max-w-5xl text-center">
-          <p className="badge mb-6">Edición 2025 · Aftermovie</p>
-          <h1 className="text-display-xl text-balance">
-            <span className="block h-brutal text-ink">Si no estuviste,</span>
-            <span className="block h-script text-brand-orange mt-3">esto te dolerá.</span>
+      <ThemedSection className="pt-24 md:pt-28 pb-6">
+        <div className="container max-w-3xl text-center">
+          <p className="badge mb-5">Aftermovie · galería · prensa</p>
+          <h1 className="h-brutal text-display-md md:text-display-lg text-ink text-balance">
+            Edición 2025
           </h1>
+          <p className="mt-5 text-base md:text-lg text-ink-muted text-pretty">
+            El recap completo del festival pasado. Vídeos, fotos y la cobertura mediática.
+          </p>
         </div>
       </ThemedSection>
 

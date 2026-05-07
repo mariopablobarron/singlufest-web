@@ -11,16 +11,14 @@ export const metadata = {
 export default function CartelPage() {
   return (
     <>
-      <ThemedSection className="pt-24 md:pt-32 pb-12">
-        <div className="container max-w-5xl text-center">
-          <p className="badge mb-6">Cartel 2026</p>
-          <h1 className="text-display-xl text-balance">
-            <span className="block h-brutal text-ink">12 candidatos.</span>
-            <span className="block h-script text-brand-orange mt-3">1 ganador.</span>
+      <ThemedSection className="pt-24 md:pt-28 pb-6">
+        <div className="container max-w-3xl text-center">
+          <p className="badge mb-5">Edición 2026 · 14-16 noviembre</p>
+          <h1 className="h-brutal text-display-md md:text-display-lg text-ink text-balance">
+            El cartel
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-ink-muted text-pretty max-w-2xl mx-auto">
-            Cada chef trae <strong className="text-ink">un solo plato</strong> al festival.
-            Tú lo pruebas, tú lo votas. El ganador se lleva el SingluTrofeo y 5.000€.
+          <p className="mt-5 text-base md:text-lg text-ink-muted text-pretty">
+            12 chefs. Cada uno con su mejor plato sin gluten. Tú pruebas, tú votas, tú decides quién se lleva el trofeo.
           </p>
         </div>
       </ThemedSection>

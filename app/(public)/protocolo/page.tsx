@@ -12,15 +12,14 @@ export const metadata = {
 export default function ProtocoloPage() {
   return (
     <>
-      <ThemedSection className="pt-28 md:pt-36 pb-12">
-        <div className="container max-w-5xl text-center">
-          <p className="badge mb-6">Seguridad alimentaria</p>
-          <h1 className="text-display-xl text-balance">
-            <span className="block h-brutal text-ink">Cero trazas.</span>
-            <span className="block h-script text-brand-orange mt-3">no es un eslogan.</span>
+      <ThemedSection className="pt-24 md:pt-28 pb-6">
+        <div className="container max-w-3xl text-center">
+          <p className="badge mb-5">Seguridad alimentaria</p>
+          <h1 className="h-brutal text-display-md md:text-display-lg text-ink text-balance">
+            Protocolo SingluFest
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-ink-muted text-pretty max-w-2xl mx-auto">
-            Es un protocolo auditado por terceros, firmado por cada candidato y verificado en directo durante el festival.
+          <p className="mt-5 text-base md:text-lg text-ink-muted text-pretty">
+            5 capas de seguridad firmadas con cada candidato. Auditadas por terceros. Verificadas en directo durante el festival.
           </p>
         </div>
       </ThemedSection>
