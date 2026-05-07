@@ -1,9 +1,38 @@
+import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { settingsSchema } from "@/lib/validations";
+import { auth } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Ajustes" };
+
+async function changePassword(formData: FormData) {
+  "use server";
+  const session = await auth();
+  if (!session?.user?.id) redirect("/admin/login");
+
+  const current = String(formData.get("currentPassword") || "");
+  const next = String(formData.get("newPassword") || "");
+  const confirm = String(formData.get("confirmPassword") || "");
+
+  const fail = (code: string) => redirect(`/admin/settings?password=err&reason=${code}`);
+
+  if (next.length < 10) return fail("short");
+  if (next !== confirm) return fail("mismatch");
+  if (next === current) return fail("same");
+
+  const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+  if (!user) return fail("nouser");
+  const valid = await bcrypt.compare(current, user.passwordHash);
+  if (!valid) return fail("wrong");
+
+  const passwordHash = await bcrypt.hash(next, 12);
+  await prisma.user.update({ where: { id: user.id }, data: { passwordHash } });
+  revalidatePath("/admin/settings");
+  redirect("/admin/settings?password=ok");
+}
 
 async function saveSettings(formData: FormData) {
   "use server";
@@ -48,9 +77,23 @@ async function createEdition(formData: FormData) {
   revalidatePath("/admin/settings");
 }
 
-export default async function SettingsAdmin() {
+type SearchParams = Promise<{ password?: string; reason?: string }>;
+
+const PWD_ERRORS: Record<string, string> = {
+  short: "La nueva contraseña debe tener al menos 10 caracteres.",
+  mismatch: "La confirmación no coincide.",
+  same: "La nueva contraseña no puede ser igual a la actual.",
+  wrong: "La contraseña actual no es correcta.",
+  nouser: "Usuario no encontrado. Vuelve a iniciar sesión.",
+};
+
+export default async function SettingsAdmin({ searchParams }: { searchParams: SearchParams }) {
   const settings = await prisma.siteSettings.findFirst();
   const editions = await prisma.edition.findMany({ orderBy: { year: "desc" } });
+  const session = await auth();
+  const sp = await searchParams;
+  const passwordOk = sp.password === "ok";
+  const passwordErr = sp.password === "err" ? (PWD_ERRORS[sp.reason ?? ""] ?? "Error al cambiar la contraseña.") : null;
 
   return (
     <div className="space-y-10">
@@ -181,6 +224,68 @@ export default async function SettingsAdmin() {
           ))}
           {editions.length === 0 && <li className="py-4 text-sm text-ink-muted">Aún no hay ediciones.</li>}
         </ul>
+      </section>
+
+      <section className="card">
+        <h2 className="text-xl font-display">Tu contraseña</h2>
+        <p className="mt-1 text-sm text-ink-muted">
+          Sesión activa: <strong>{session?.user?.email ?? "—"}</strong>. Tras cambiarla, la nueva queda activa al instante en próximos logins.
+        </p>
+
+        {passwordOk && (
+          <div className="mt-5 rounded-xl border border-brand-orange/30 bg-brand-orange/10 px-4 py-3 text-sm text-ink">
+            ✓ Contraseña actualizada. La próxima vez que inicies sesión, usa la nueva.
+          </div>
+        )}
+        {passwordErr && (
+          <div className="mt-5 rounded-xl border border-brand-burn/40 bg-brand-burn/10 px-4 py-3 text-sm text-brand-burn">
+            ✗ {passwordErr}
+          </div>
+        )}
+
+        <form action={changePassword} className="mt-6 grid gap-4 md:grid-cols-3">
+          <div>
+            <label className="field-label" htmlFor="currentPassword">Contraseña actual</label>
+            <input
+              id="currentPassword"
+              name="currentPassword"
+              type="password"
+              required
+              autoComplete="current-password"
+              className="field-input"
+            />
+          </div>
+          <div>
+            <label className="field-label" htmlFor="newPassword">Nueva contraseña</label>
+            <input
+              id="newPassword"
+              name="newPassword"
+              type="password"
+              required
+              minLength={10}
+              autoComplete="new-password"
+              className="field-input"
+            />
+          </div>
+          <div>
+            <label className="field-label" htmlFor="confirmPassword">Repetir nueva</label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              required
+              minLength={10}
+              autoComplete="new-password"
+              className="field-input"
+            />
+          </div>
+          <div className="md:col-span-3 flex items-center justify-between gap-4 border-t border-line pt-5">
+            <p className="text-xs text-ink-muted">
+              Mínimo 10 caracteres. Recomendamos 16+ con un gestor de contraseñas. Sin caracteres confusos (O/0, l/1).
+            </p>
+            <button className="btn-primary">Actualizar contraseña</button>
+          </div>
+        </form>
       </section>
     </div>
   );

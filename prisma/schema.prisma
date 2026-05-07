@@ -208,6 +208,18 @@ model EmailSubscriber {
   createdAt DateTime @default(now())
 }
 
+model Vote {
+  id             String   @id @default(cuid())
+  candidateSlug  String   // matches partner/[slug] o sponsor.slug
+  voterToken     String   // hash(ip + cookie + secret) para evitar duplicados sin guardar PII
+  userAgent      String?
+  createdAt      DateTime @default(now())
+
+  @@unique([candidateSlug, voterToken])
+  @@index([candidateSlug])
+  @@index([createdAt])
+}
+
 model AgentRun {
   id        String   @id @default(cuid())
   agent     String   // "redactor" | "analista" | "video-builder"

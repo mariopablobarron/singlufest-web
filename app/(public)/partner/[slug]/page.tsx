@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Heart, ArrowLeft, Sparkles } from "lucide-react";
+import { cookies } from "next/headers";
+import { ArrowLeft, Sparkles } from "lucide-react";
 import { ThemedSection } from "@/components/v2/SectionTheme";
 import { FinalCtaV2 } from "@/components/v2/FinalCta";
+import { VoteButton } from "@/components/VoteButton";
+import { prisma } from "@/lib/db";
+import { buildVoterToken, VOTE_COOKIE_NAME } from "@/lib/voting";
 
 export const metadata = {
   title: "Candidato",
@@ -67,10 +71,31 @@ const PARTNERS: Record<
 
 type Params = Promise<{ slug: string }>;
 
+async function loadVoteContext(slug: string, basePriorVotes: number) {
+  try {
+    const count = await prisma.vote.count({ where: { candidateSlug: slug } });
+    const jar = await cookies();
+    const cookieToken = jar.get(VOTE_COOKIE_NAME)?.value;
+    let voted = false;
+    if (cookieToken) {
+      const token = buildVoterToken({ ip: "rsc", cookieToken });
+      const own = await prisma.vote.findFirst({
+        where: { candidateSlug: slug, voterToken: token },
+        select: { id: true },
+      });
+      voted = !!own;
+    }
+    return { count: count + basePriorVotes, voted };
+  } catch {
+    return { count: basePriorVotes, voted: false };
+  }
+}
+
 export default async function PartnerPage({ params }: { params: Params }) {
   const { slug } = await params;
   const p = PARTNERS[slug];
   if (!p) notFound();
+  const { count: voteCount, voted } = await loadVoteContext(slug, p.votes ?? 0);
 
   return (
     <>
@@ -96,11 +121,13 @@ export default async function PartnerPage({ params }: { params: Params }) {
               ) : (
                 <span className="badge !text-brand-orange !border-brand-orange/40">Por anunciar</span>
               )}
-              {p.votes && (
-                <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-4 py-2 text-sm">
-                  <Heart className="w-4 h-4 fill-brand-orange text-brand-orange" />
-                  <strong>{p.votes.toLocaleString("es-ES")}</strong> votos en 2025
-                </span>
+              {p.price > 0 && (
+                <VoteButton
+                  slug={slug}
+                  initialCount={voteCount}
+                  initialVoted={voted}
+                  variant="hero"
+                />
               )}
               <span className="badge !text-brand-carbon !bg-brand-bone !border-brand-bone">0 trazas</span>
             </div>

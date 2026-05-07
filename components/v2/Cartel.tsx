@@ -1,6 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, Heart } from "lucide-react";
+import { cookies } from "next/headers";
+import { ArrowRight } from "lucide-react";
 import { ThemedSection } from "./SectionTheme";
+import { VoteButton } from "../VoteButton";
+import { prisma } from "@/lib/db";
+import { buildVoterToken, VOTE_COOKIE_NAME } from "@/lib/voting";
 
 type Candidate = {
   number: string;
@@ -139,7 +143,37 @@ const CANDIDATES: Candidate[] = [
   },
 ];
 
-export function CartelV2() {
+async function loadVoteData(slugs: string[]) {
+  try {
+    const counts = await prisma.vote.groupBy({
+      by: ["candidateSlug"],
+      where: { candidateSlug: { in: slugs } },
+      _count: true,
+    });
+    const map = new Map<string, number>(counts.map((c) => [c.candidateSlug, c._count]));
+
+    // Cookie del visitante para resaltar sus votos previos.
+    const jar = await cookies();
+    const cookieToken = jar.get(VOTE_COOKIE_NAME)?.value;
+    let voted = new Set<string>();
+    if (cookieToken) {
+      // No tenemos IP en RSC server-only sin headers; usamos sólo cookie hash. Adecuado para hint UI.
+      const token = buildVoterToken({ ip: "rsc", cookieToken });
+      const own = await prisma.vote.findMany({
+        where: { voterToken: token, candidateSlug: { in: slugs } },
+        select: { candidateSlug: true },
+      });
+      voted = new Set(own.map((o) => o.candidateSlug));
+    }
+    return { map, voted };
+  } catch {
+    return { map: new Map<string, number>(), voted: new Set<string>() };
+  }
+}
+
+export async function CartelV2() {
+  const { map: voteCounts, voted } = await loadVoteData(CANDIDATES.map((c) => c.slug));
+
   return (
     <ThemedSection alt className="py-24 md:py-32" id="cartel">
       <div className="container">
@@ -186,11 +220,13 @@ export function CartelV2() {
                         <span className="h-brutal text-2xl text-brand-bone glow-orange">
                           {c.price > 0 ? `${c.price}€` : "?"}
                         </span>
-                        {c.votes && (
-                          <span className="inline-flex items-center gap-1.5 text-xs text-brand-bone/85 bg-brand-carbon/40 backdrop-blur px-3 py-1.5 rounded-full">
-                            <Heart className="w-3.5 h-3.5 fill-brand-orange text-brand-orange" />
-                            {c.votes.toLocaleString("es-ES")}
-                          </span>
+                        {c.price > 0 && (
+                          <VoteButton
+                            slug={c.slug}
+                            initialCount={(voteCounts.get(c.slug) ?? 0) + (c.votes ?? 0)}
+                            initialVoted={voted.has(c.slug)}
+                            variant="card"
+                          />
                         )}
                       </div>
                     </div>
@@ -223,12 +259,12 @@ export function CartelV2() {
                       <h3 className="h-brutal text-2xl text-brand-bone leading-tight">{c.dish}</h3>
                       <div className="mt-3 flex items-center justify-between">
                         <span className="h-brutal text-xl text-brand-bone glow-orange">{c.price}€</span>
-                        {c.votes && (
-                          <span className="inline-flex items-center gap-1 text-[10px] text-brand-bone/85">
-                            <Heart className="w-3 h-3 fill-brand-orange text-brand-orange" />
-                            {c.votes.toLocaleString("es-ES")}
-                          </span>
-                        )}
+                        <VoteButton
+                          slug={c.slug}
+                          initialCount={(voteCounts.get(c.slug) ?? 0) + (c.votes ?? 0)}
+                          initialVoted={voted.has(c.slug)}
+                          variant="card"
+                        />
                       </div>
                     </div>
                   </div>
