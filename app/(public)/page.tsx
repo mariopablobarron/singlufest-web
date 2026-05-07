@@ -6,7 +6,7 @@ import { TicketsV2 } from "@/components/v2/Tickets";
 import { ProtocolV2 } from "@/components/v2/Protocol";
 import { AftermovieV2 } from "@/components/v2/Aftermovie";
 import { SocialWallV2 } from "@/components/v2/SocialWall";
-import { PartnersBannerV2 } from "@/components/v2/PartnersBanner";
+import { PartnersMarqueeV2 } from "@/components/v2/PartnersMarquee";
 import { FaqV2 } from "@/components/v2/Faq";
 import { FinalCtaV2 } from "@/components/v2/FinalCta";
 import { prisma } from "@/lib/db";
@@ -34,7 +34,7 @@ export default async function HomePage() {
       <ProtocolV2 />
       <AftermovieV2 />
       <SocialWallV2 />
-      <PartnersBannerV2 />
+      <PartnersMarqueeV2 />
       <FaqV2 />
       <FinalCtaV2 bookingsOpen={bookingsOpen} ticketsLeft={312} generalPrice={18} />
     </>
