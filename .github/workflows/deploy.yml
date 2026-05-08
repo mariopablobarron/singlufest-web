@@ -1,0 +1,76 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # permite lanzar manualmente desde la UI de GitHub
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false # no cancelar deploys en curso
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Rsync code to VPS
+        run: |
+          rsync -az --delete \
+            --exclude='node_modules' \
+            --exclude='.next' \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.env*' \
+            --exclude='.playwright-mcp' \
+            --exclude='*.tsbuildinfo' \
+            --exclude='.DS_Store' \
+            --exclude='public/uploads/*' \
+            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+            ./ "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/"
+
+      - name: Trigger rebuild on VPS
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+            "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+            "cd ${{ secrets.DEPLOY_PATH }} && \
+             nohup docker compose up -d --build singlufest-app > /tmp/singlufest-rebuild.log 2>&1 & \
+             echo 'Rebuild dispatched'"
+
+      - name: Wait for healthy + smoke test
+        run: |
+          echo "Esperando container healthy (timeout 6 min)..."
+          for i in {1..36}; do
+            STATUS=$(ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+              "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+              "docker ps --filter name=singlufest-singlufest-app --format '{{.Status}}'" 2>/dev/null || echo "ssh-error")
+            if echo "$STATUS" | grep -qE "Up [0-9]+ second|Up About a minute|Up 1 minute|Up 2 minute"; then
+              echo "✓ Container fresh & healthy: $STATUS"
+              break
+            fi
+            echo "[$i/36] $STATUS — esperando 10s..."
+            sleep 10
+          done
+
+          echo "Smoke test endpoints:"
+          for path in / /api/health /cartel /admin/login; do
+            CODE=$(curl -s --max-time 8 -o /dev/null -w "%{http_code}" "https://singlufest.hubstartidea.es$path")
+            echo "  $CODE  $path"
+            if [ "$CODE" != "200" ]; then
+              echo "❌ $path no responde 200"
+              exit 1
+            fi
+          done
+          echo "✓ Deploy OK"
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519
