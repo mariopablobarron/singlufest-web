@@ -51,6 +51,15 @@ export async function POST(req: NextRequest, ctx: { params: Params }) {
     return NextResponse.json({ error: "Slug inválido" }, { status: 400 });
   }
 
+  // Anti-spam: el slug debe existir en Candidate y estar publicado.
+  const candidate = await prisma.candidate.findUnique({
+    where: { slug },
+    select: { id: true, isPublished: true },
+  });
+  if (!candidate || !candidate.isPublished) {
+    return NextResponse.json({ error: "Candidato no encontrado" }, { status: 404 });
+  }
+
   const jar = await cookies();
   let cookieToken = jar.get(VOTE_COOKIE_NAME)?.value;
   if (!cookieToken) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 export function RoiCalculator() {
   const [tier, setTier] = useState<"plata" | "oro" | "diamante">("oro");
