@@ -208,6 +208,30 @@ model EmailSubscriber {
   createdAt DateTime @default(now())
 }
 
+model Candidate {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  number         String              // "01" .. "12" o lo que quieras
+  chef           String              // "KIMCAKES"
+  dish           String              // "La Reina"
+  description    String   @db.Text   // pitch del plato
+  longBio        String?  @db.Text   // bio del chef para la ficha
+  price          Int      @default(0)  // en € enteros (0 = "por anunciar")
+  bg             String   @default("from-brand-orange via-brand-tangerine to-brand-burn")
+  badge          String?              // "Headliner", "Emergente"…
+  websiteUrl     String?
+  instagramUrl   String?
+  imageUrl       String?              // foto del plato cuando llegue
+  location       String?
+  foundedYear    Int?
+  isPublished    Boolean  @default(true)
+  order          Int      @default(0) // orden en el cartel
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([order, isPublished])
+}
+
 model Vote {
   id             String   @id @default(cuid())
   candidateSlug  String   // matches partner/[slug] o sponsor.slug

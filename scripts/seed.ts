@@ -118,6 +118,65 @@ async function main() {
   });
   console.log("✓ Colaborador: Granada Social");
 
+  // ─── Candidatos del concurso (los 12 del cartel) ─────────────────────────
+  const candidates = [
+    { number: "01", slug: "kimcakes", chef: "KIMCAKES", dish: "La Reina",
+      description: "Cheesecake volcánico, almendra tostada y caramelo de cerveza sin gluten.",
+      longBio: "KIMCAKES es el obrador de repostería sin gluten más premiado de España. Empezó como un proyecto familiar en 2018 y hoy distribuye en 30 restaurantes premium. Su 'Reina' fue elegida mejor cheesecake sin gluten de Europa por Pastry Awards 2025.",
+      price: 7, badge: "Headliner",
+      bg: "from-brand-orange via-brand-tangerine to-brand-burn",
+      websiteUrl: "https://kimcakes.es", instagramUrl: "https://www.instagram.com/kimcakes/",
+      location: "Granada", foundedYear: 2018 },
+    { number: "02", slug: "carmela", chef: "Carmela", dish: "El Bocadillo Imposible",
+      description: "Pan brioche sin gluten relleno de chuletón madurado 60 días y mantequilla ahumada.",
+      longBio: "Carmela es un obrador artesano que lleva 12 años perfeccionando masas sin gluten que no tienen nada que envidiar a las tradicionales. Su 'Bocadillo Imposible' es lo que pasa cuando combinas técnica de panadería francesa con producto cárnico premium español.",
+      price: 9, badge: "Headliner",
+      bg: "from-brand-wine via-[#9B2A41] to-brand-burn",
+      location: "Madrid", foundedYear: 2014 },
+    { number: "03", slug: "headliner-3", chef: "TBA", dish: "Próximamente",
+      description: "El tercer cabeza de cartel se anuncia el 1 de septiembre.",
+      longBio: "Aún bajo embargo. Pista: viene del País Vasco y trabajó con dos chefs Michelin antes de abrir su proyecto.",
+      price: 0, badge: "Headliner",
+      bg: "from-brand-carbon via-brand-ember to-brand-ink" },
+    { number: "04", slug: "tahona-sur", chef: "Tahona Sur", dish: "Croissant 36h",
+      description: "Croissant de fermentación lenta, hojaldrado a mano. Crujiente real.",
+      price: 4, bg: "from-brand-lemon via-brand-orange to-brand-burn" },
+    { number: "05", slug: "brewmaster-gf", chef: "Brewmaster GF", dish: "IPA Tres Lúpulos",
+      description: "Cerveza artesana 100% sin cebada. Tropical, amarga, peligrosa.",
+      price: 5, bg: "from-[#F5C56B] via-brand-orange to-brand-burn" },
+    { number: "06", slug: "heladeria-lunar", chef: "Heladería Lunar", dish: "Sorbete de Granada",
+      description: "Granada del Albaicín, romero del Sacromonte y ralladura de yuzu.",
+      price: 4, bg: "from-[#E76F51] via-brand-orange to-[#C24412]" },
+    { number: "07", slug: "pan-de-pueblo", chef: "Pan de Pueblo", dish: "Hogaza Madre",
+      description: "Pan de masa madre 100% sin gluten. Corteza dura, miga aireada. Imposible distinguirlo.",
+      price: 6, bg: "from-[#CE7C2D] via-brand-orange to-brand-burn" },
+    { number: "08", slug: "granada-fermenta", chef: "Granada Fermenta", dish: "Kimchi del Albaicín",
+      description: "Fermentado andaluz, picante medio, con tostada de teff. Para los valientes.",
+      price: 5, bg: "from-[#A4243B] via-brand-wine to-brand-burn" },
+    { number: "09", slug: "cafe-colibri", chef: "Café Colibrí", dish: "Brunch Plato",
+      description: "Huevos rotos sobre teff con bacon ibérico y pan de molde sin gluten.",
+      price: 8, bg: "from-[#F4A261] via-brand-orange to-[#C24412]" },
+    { number: "10", slug: "quesos-reyna", chef: "Quesos del Reyna", dish: "Tabla del Sur",
+      description: "5 quesos curados de pastor + miel de azahar + crackers de garbanzo.",
+      price: 9, bg: "from-brand-gold via-brand-orange to-brand-burn" },
+    { number: "11", slug: "vermut-co", chef: "Vermut & Co", dish: "Vermut Rojo Granadino",
+      description: "Vermut de la casa con aceitunas premium y boquerón en vinagre. Sin trampa.",
+      price: 4, bg: "from-brand-wine via-[#A4243B] to-brand-burn" },
+    { number: "12", slug: "dolce-vento", chef: "Dolce Vento", dish: "Tiramisú del Sacromonte",
+      description: "Bizcocho de almendra, mascarpone batido, café Colombia. La mejor versión.",
+      price: 6, bg: "from-[#6B3F2A] via-brand-burn to-brand-carbon" },
+  ];
+
+  for (let i = 0; i < candidates.length; i++) {
+    const c = candidates[i];
+    await prisma.candidate.upsert({
+      where: { slug: c.slug },
+      create: { ...c, order: i + 1, isPublished: true },
+      update: {}, // si ya existe, no toca lo que el admin haya editado
+    });
+  }
+  console.log(`✓ ${candidates.length} candidatos sembrados`);
+
   console.log("\n✅ Seed terminado.\n");
 }
 
