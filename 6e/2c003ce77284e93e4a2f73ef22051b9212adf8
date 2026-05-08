@@ -1,0 +1,21 @@
+app/api/vote/[slug]/route.ts
+  s_2973c3e7d39dce::t_bb9f5cbce9c3a4 54-62
+components/b2b/RoiCalculator.tsx
+  s_2973c3e7d39dce::t_29f81bec47afba 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "6e2c003ce77284e93e4a2f73ef22051b9212adf8",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
