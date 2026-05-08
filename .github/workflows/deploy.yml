@@ -51,7 +51,7 @@ jobs:
           for i in {1..60}; do
             DONE=$(ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
               "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
-              "tail -3 /tmp/singlufest-rebuild.log 2>/dev/null | grep -cE 'Started\$|Recreated.*Started|exit code|^Error|Failed'" 2>/dev/null || echo "0")
+              "tail -3 /tmp/singlufest-rebuild.log 2>/dev/null | grep -cE 'Started\\s*\$|exit code|^Error|Failed'" 2>/dev/null || echo "0")
             if [ "$DONE" -gt "0" ]; then
               echo "✓ Build terminado, container reiniciado"
               break
