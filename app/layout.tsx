@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     url: SITE.url,
     siteName: SITE.name,
     title: `${SITE.name} — ${SITE.tagline}`,
-    description: "El primer festival foodie 100% sin gluten. Granada, noviembre 2026.",
+    description: "El primer festival foodie 100% sin gluten en Granada. Sin fechas, sin trigo.",
     images: ["/brand/og-default.png"],
   },
   twitter: { card: "summary_large_image" },

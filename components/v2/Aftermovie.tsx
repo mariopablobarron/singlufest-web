@@ -53,7 +53,7 @@ export function AftermovieV2({ videoUrl }: { videoUrl?: string }) {
                   El primer aftermovie
                 </p>
                 <p className="mt-3 text-brand-bone/85 text-base md:text-lg">
-                  Llegará tras la primera edición. <strong className="text-brand-orange">Granada, 14-16 noviembre 2026.</strong>
+                  Llegará tras la primera edición. <strong className="text-brand-orange">Granada. Sin fechas, sin trigo.</strong>
                 </p>
                 <Link
                   href="/entradas"

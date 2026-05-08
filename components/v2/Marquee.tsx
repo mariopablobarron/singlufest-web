@@ -8,7 +8,7 @@ const PHRASES = [
   "PRUEBA. VOTA. DECIDE.",
   "EL PARAÍSO EXISTE",
   "100% SIN GLUTEN",
-  "GRANADA 2026",
+  "GRANADA",
 ];
 
 export function MarqueeV2() {

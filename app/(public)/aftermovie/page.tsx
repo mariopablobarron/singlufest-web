@@ -4,7 +4,7 @@ import { Calendar, Sparkles, Megaphone } from "lucide-react";
 
 export const metadata = {
   title: "Aftermovie · próximamente",
-  description: "El primer aftermovie del SingluFest llegará tras la edición de noviembre 2026 en Granada.",
+  description: "El primer aftermovie del SingluFest llegará tras la primera edición en Granada.",
 };
 
 export default function AftermoviePage() {
@@ -12,7 +12,7 @@ export default function AftermoviePage() {
     <>
       <ThemedSection className="pt-24 md:pt-28 pb-16">
         <div className="container max-w-3xl text-center">
-          <p className="badge mb-5">Primera edición · 14-16 noviembre 2026</p>
+          <p className="badge mb-5">Primera edición · próximamente</p>
           <h1 className="h-brutal text-display-md md:text-display-lg text-ink text-balance">
             El primer aftermovie llega
             <span className="block h-script text-brand-orange mt-2">después del festival.</span>
@@ -29,7 +29,7 @@ export default function AftermoviePage() {
           <div className="grid gap-6 md:grid-cols-3">
             <div className="card-elevated">
               <Calendar className="w-8 h-8 text-brand-orange" />
-              <h3 className="mt-4 h-brutal text-xl text-ink">14-16 nov 2026</h3>
+              <h3 className="mt-4 h-brutal text-xl text-ink">Fechas por anunciar</h3>
               <p className="mt-2 text-sm text-ink-muted">
                 Tres días en Granada con 10 stands cocinando en directo.
               </p>

@@ -78,7 +78,7 @@ export default function B2BPage() {
               <div className="rounded-3xl bg-brand-carbon text-brand-bone p-8 md:p-10 grain relative overflow-hidden shadow-[0_30px_60px_-20px_rgba(11,8,7,0.4)]">
                 <p className="badge !text-brand-orange !border-brand-orange/40 mb-6">Edición piloto 2026 · objetivos</p>
                 <ul className="space-y-3 text-brand-bone/90">
-                  <li className="flex justify-between"><span>Días de festival</span> <strong className="text-brand-orange">14-16 nov</strong></li>
+                  <li className="flex justify-between"><span>Fechas</span> <strong className="text-brand-orange">por anunciar</strong></li>
                   <li className="flex justify-between"><span>Stands en concurso</span> <strong className="text-brand-orange">10</strong></li>
                   <li className="flex justify-between"><span>Aforo objetivo</span> <strong className="text-brand-orange">3.000+</strong></li>
                   <li className="flex justify-between"><span>Cabezas de cartel ya cerrados</span> <strong className="text-brand-orange">2</strong></li>
@@ -116,7 +116,7 @@ export default function B2BPage() {
             ))}
           </ul>
           <p className="mt-6 text-xs text-ink-muted italic">
-            Objetivos de la primera edición (14-16 noviembre 2026). Tras el evento, sustituimos por datos reales auditados.
+            Objetivos de la primera edición. Tras el evento, sustituimos por datos reales auditados.
           </p>
         </div>
       </ThemedSection>

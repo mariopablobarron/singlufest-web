@@ -15,7 +15,7 @@ export default function CartelPage() {
     <>
       <ThemedSection className="pt-24 md:pt-28 pb-6">
         <div className="container max-w-3xl text-center">
-          <p className="badge mb-5">Edición 2026 · 14-16 noviembre</p>
+          <p className="badge mb-5">Edición piloto · sin fechas, sin trigo</p>
           <h1 className="h-brutal text-display-md md:text-display-lg text-ink text-balance">
             El cartel
           </h1>
