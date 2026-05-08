@@ -1,0 +1,41 @@
+lib/site.ts
+  s_2973c3e7d39dce::t_659fc4612c8d5a 25
+app/(public)/sorteos/page.tsx
+  s_2973c3e7d39dce::t_a66160b5af472e 1-111
+prisma/schema.prisma
+  s_2973c3e7d39dce::t_e8cfe93956a3e6 235-305
+app/admin/(panel)/sorteos/page.tsx
+  s_2973c3e7d39dce::t_beb7e55c524c32 1-201
+components/GiveawayForm.tsx
+  s_2973c3e7d39dce::t_6cc34e560dd2fa 1-119
+lib/giveaways.ts
+  s_2973c3e7d39dce::t_47a144625b0aa5 1-84
+app/api/giveaways/[slug]/enter/route.ts
+  s_2973c3e7d39dce::t_c825255bc54531 1-139
+lib/validations-giveaway.ts
+  s_2973c3e7d39dce::t_af1b5dfb5caebe 1-39
+app/admin/(panel)/layout.tsx
+  s_2973c3e7d39dce::t_c258deb25f6f2f 5,10
+app/api/webhooks/instagram/route.ts
+  s_2973c3e7d39dce::t_72945a740024ef 1-151
+app/(public)/sorteos/[slug]/page.tsx
+  s_2973c3e7d39dce::t_fa40be51f5cad7 1-129
+app/admin/(panel)/sorteos/[slug]/page.tsx
+  s_2973c3e7d39dce::t_b08e0406f19a45 1-256
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "ddc8ff21448cfa6909de8bc0a94e69c6a4059b08",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
