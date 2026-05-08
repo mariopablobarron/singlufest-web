@@ -3,9 +3,11 @@ import { ThemedSection } from "@/components/v2/SectionTheme";
 import { FinalCtaV2 } from "@/components/v2/FinalCta";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Cartel 2026",
-  description: "Los 12 candidatos del SingluFest. Cabezas de cartel: KIMCAKES, Carmela y un tercer headliner por anunciar.",
+  description: "Los 10 stands del SingluFest. Cabezas de cartel: KIMCAKES, Carmela y un tercer headliner por anunciar.",
 };
 
 export default function CartelPage() {
@@ -18,7 +20,7 @@ export default function CartelPage() {
             El cartel
           </h1>
           <p className="mt-5 text-base md:text-lg text-ink-muted text-pretty">
-            12 chefs. Cada uno con su mejor plato sin gluten. Tú pruebas, tú votas, tú decides quién se lleva el trofeo.
+            10 iconos gastronómicos. Cada uno con su mejor plato sin gluten. Tú pruebas, tú votas, tú decides quién se lleva el trofeo.
           </p>
         </div>
       </ThemedSection>
@@ -32,7 +34,7 @@ export default function CartelPage() {
             Las plazas para 2027 ya se están abriendo.
           </h2>
           <p className="mt-6 text-lg text-ink-muted text-pretty">
-            Solo entran 12 candidatos al concurso por edición. Si crees que tu plato puede pelear el SingluTrofeo,
+            Solo entran 10 stands al concurso por edición. Si crees que tu plato puede pelear el SingluTrofeo,
             escríbenos antes del 1 de mayo de 2027 con tu propuesta. Recibirás respuesta en 7 días.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">

@@ -22,7 +22,7 @@ export function FinalCtaV2({
           <span className="block h-script text-brand-carbon mt-3">y no tiene trazas.</span>
         </h2>
         <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-brand-bone/95 text-pretty">
-          12 candidatos. 1 trofeo. 3 días en Granada.
+          10 stands. 1 trofeo. 3 días en Granada.
           <span className="block mt-1 text-brand-bone">{ticketsLeft} personas ya tienen su sitio.</span>
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

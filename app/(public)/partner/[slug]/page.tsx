@@ -9,6 +9,8 @@ import { prisma } from "@/lib/db";
 import { buildVoterToken, VOTE_COOKIE_NAME } from "@/lib/voting";
 import { loadCandidateBySlug } from "@/lib/candidates";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Candidato",
 };

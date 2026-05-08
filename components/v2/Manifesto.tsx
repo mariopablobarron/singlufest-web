@@ -18,7 +18,7 @@ export function ManifestoV2() {
           </p>
           <p>
             <strong className="text-ink">SingluFest no es una feria.</strong> Es un concurso.
-            12 chefs traen su mejor plato sin gluten. Tú lo pruebas, tú lo votas.
+            10 iconos gastronómicos traen su mejor plato sin gluten. Tú lo pruebas, tú lo votas.
             Sin compromisos. Sin <em>"ya he limpiado la sartén"</em>. Sin trazas.
             Aquí tú eres el rey, no la excepción.
           </p>

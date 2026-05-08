@@ -31,7 +31,7 @@ export default function AftermoviePage() {
               <Calendar className="w-8 h-8 text-brand-orange" />
               <h3 className="mt-4 h-brutal text-xl text-ink">14-16 nov 2026</h3>
               <p className="mt-2 text-sm text-ink-muted">
-                Tres días en Granada con 12 chefs cocinando en directo.
+                Tres días en Granada con 10 stands cocinando en directo.
               </p>
             </div>
             <div className="card-elevated">

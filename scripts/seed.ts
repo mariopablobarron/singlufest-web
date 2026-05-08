@@ -159,12 +159,6 @@ async function main() {
     { number: "10", slug: "quesos-reyna", chef: "Quesos del Reyna", dish: "Tabla del Sur",
       description: "5 quesos curados de pastor + miel de azahar + crackers de garbanzo.",
       price: 9, bg: "from-brand-gold via-brand-orange to-brand-burn" },
-    { number: "11", slug: "vermut-co", chef: "Vermut & Co", dish: "Vermut Rojo Granadino",
-      description: "Vermut de la casa con aceitunas premium y boquerón en vinagre. Sin trampa.",
-      price: 4, bg: "from-brand-wine via-[#A4243B] to-brand-burn" },
-    { number: "12", slug: "dolce-vento", chef: "Dolce Vento", dish: "Tiramisú del Sacromonte",
-      description: "Bizcocho de almendra, mascarpone batido, café Colombia. La mejor versión.",
-      price: 6, bg: "from-[#6B3F2A] via-brand-burn to-brand-carbon" },
   ];
 
   for (let i = 0; i < candidates.length; i++) {

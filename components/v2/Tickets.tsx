@@ -41,7 +41,7 @@ const TIERS: Tier[] = [
     bg: "bg-brand-orange text-brand-bone",
     perks: [
       "Todo lo del General",
-      "12 tickets de degustación (un voto por candidato)",
+      "10 tickets de degustación (un voto por stand)",
       "Cata privada con un headliner",
       "Mesa reservada con vista",
       "Pack merch (camiseta + tote)",

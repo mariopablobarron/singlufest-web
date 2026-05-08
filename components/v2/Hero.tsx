@@ -56,7 +56,7 @@ export function HeroV2({
           </h1>
 
           <p className="mt-8 max-w-xl text-lg md:text-2xl text-ink/80 text-pretty">
-            12 chefs. 12 platos. <strong className="text-ink">1 ganador.</strong>
+            10 stands. 10 iconos gastronómicos. <strong className="text-ink">1 ganador.</strong>
             <br />
             El primer concurso gastronómico 100% sin gluten de España.
           </p>
@@ -110,7 +110,7 @@ export function HeroV2({
       <div className="container mt-20 md:mt-28">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
           {[
-            { kpi: "12", label: "candidatos en concurso" },
+            { kpi: "10", label: "stands en concurso" },
             { kpi: "20+", label: "showcookings en directo" },
             { kpi: "3", label: "días en granada" },
             { kpi: "0%", label: "trazas, sin excusas" },
