@@ -2,11 +2,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth, signOut } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
-import { LayoutDashboard, CalendarDays, Building2, Newspaper, Settings, Sparkles, LogOut, Users, Trophy } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Building2, Newspaper, Settings, Sparkles, LogOut, Users, Trophy, Gift } from "lucide-react";
 
 const NAV = [
   { href: "/admin", label: "Panel", icon: LayoutDashboard },
   { href: "/admin/cartel", label: "Cartel", icon: Trophy },
+  { href: "/admin/sorteos", label: "Sorteos", icon: Gift },
   { href: "/admin/reservas", label: "Reservas", icon: Users },
   { href: "/admin/eventos", label: "Programa", icon: CalendarDays },
   { href: "/admin/sponsors", label: "Patrocinadores", icon: Building2 },

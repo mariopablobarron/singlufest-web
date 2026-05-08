@@ -22,6 +22,7 @@ export const SITE = {
   nav: [
     { label: "Cartel", href: "/cartel" },
     { label: "Manifiesto", href: "/manifiesto" },
+    { label: "Sorteos", href: "/sorteos" },
     { label: "Protocolo", href: "/protocolo" },
     { label: "Partners", href: "/b2b" },
     { label: "Entradas", href: "/entradas", emphasis: true },

@@ -232,6 +232,77 @@ model Candidate {
   @@index([order, isPublished])
 }
 
+enum GiveawayStatus {
+  DRAFT
+  ACTIVE
+  CLOSED
+  DRAWN
+}
+
+enum GiveawayEntrySource {
+  WEB             // formulario en /sorteos/[slug]
+  INSTAGRAM_TAG   // detectado por webhook Graph API
+  INSTAGRAM_STORY // detectado por mention en story
+  ADMIN           // añadido manualmente por admin
+}
+
+enum GiveawayEntryStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  WINNER
+}
+
+model Giveaway {
+  id            String          @id @default(cuid())
+  slug          String          @unique
+  title         String
+  shortPitch    String          @db.Text          // 1 frase pitch
+  description   String          @db.Text          // descripción completa MDX/HTML simple
+  prize         String          @db.Text
+  imageUrl      String?
+  rules         String[]        @default([])      // requisitos visibles ("Seguir @singlufest", etc.)
+  hashtag       String?                            // sin # — ej. "SingluFestSorteo"
+  mentionTarget String          @default("singlufest") // handle a mencionar (sin @)
+  startsAt      DateTime        @default(now())
+  endsAt        DateTime
+  drawnAt       DateTime?
+  winnerEntryId String?         @unique
+  status        GiveawayStatus  @default(DRAFT)
+  isPublished   Boolean         @default(false)
+  maxEntries    Int?                               // null = sin límite
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  entries       GiveawayEntry[]
+}
+
+model GiveawayEntry {
+  id            String              @id @default(cuid())
+  giveawayId    String
+  giveaway      Giveaway            @relation(fields: [giveawayId], references: [id], onDelete: Cascade)
+  email         String
+  name          String?
+  igHandle      String              // sin @, en minúsculas
+  sharedPostUrl String?
+  source        GiveawayEntrySource @default(WEB)
+  status        GiveawayEntryStatus @default(PENDING)
+  verifiedAt    DateTime?
+  verifiedBy    String?             // user id del admin que verificó
+  rejectionReason String?
+  ipHash        String?
+  userAgent     String?
+  igMediaId     String?             // id del post de IG si webhook lo detecta
+  metadata      Json?               // datos extra (oembed, raw webhook)
+  createdAt     DateTime            @default(now())
+  notifiedAt    DateTime?           // si fue ganador y se le notificó
+
+  @@unique([giveawayId, email])
+  @@unique([giveawayId, igHandle])
+  @@index([giveawayId, status])
+  @@index([igHandle])
+}
+
 model Vote {
   id             String   @id @default(cuid())
   candidateSlug  String   // matches partner/[slug] o sponsor.slug
