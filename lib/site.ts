@@ -8,7 +8,7 @@ export const SITE = {
   url: "https://singlufest.hubstartidea.es",
   defaultLocale: "es" as const,
   edition: {
-    label: "GRANADA · 14-16 NOVIEMBRE 2026",
+    label: "GRANADA · SIN FECHAS, SIN TRIGO",
     city: "Granada",
   },
   social: {
