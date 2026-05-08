@@ -1,0 +1,31 @@
+components/v2/Cartel.tsx
+  s_2973c3e7d39dce::t_21e276984a71be 8,37-52,61,78-79,91,100,114-141,144-149
+app/admin/(panel)/cartel/page.tsx
+  s_2973c3e7d39dce::t_78b6fb7d897281 1-273
+app/admin/(panel)/layout.tsx
+  s_2973c3e7d39dce::t_08f7950650d0b7 5,9
+app/(public)/partner/[slug]/page.tsx
+  s_2973c3e7d39dce::t_3aae58a8f24096 10,18,32,34,40-42,95-106,119-124,126-138,140-143,145-148
+prisma/schema.prisma
+  s_2973c3e7d39dce::t_fbe53efeec316c 211-234
+scripts/seed.ts
+  s_2973c3e7d39dce::t_e89ae07cfab8cd 121-179
+lib/candidates.ts
+  s_2973c3e7d39dce::t_0a0209ada80ed1 1-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "2d309d31731c312eca172b4744ef776743d43618",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
