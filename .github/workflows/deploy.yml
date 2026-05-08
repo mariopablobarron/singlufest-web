@@ -45,30 +45,53 @@ jobs:
              nohup docker compose up -d --build singlufest-app > /tmp/singlufest-rebuild.log 2>&1 & \
              echo 'Rebuild dispatched'"
 
-      - name: Wait for healthy + smoke test
+      - name: Wait for build to finish (rebuild log)
         run: |
-          echo "Esperando container healthy (timeout 6 min)..."
-          for i in {1..36}; do
-            STATUS=$(ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+          echo "Esperando que docker compose build termine (timeout 10 min)..."
+          for i in {1..60}; do
+            DONE=$(ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
               "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
-              "docker ps --filter name=singlufest-singlufest-app --format '{{.Status}}'" 2>/dev/null || echo "ssh-error")
-            if echo "$STATUS" | grep -qE "Up [0-9]+ second|Up About a minute|Up 1 minute|Up 2 minute"; then
-              echo "✓ Container fresh & healthy: $STATUS"
+              "tail -3 /tmp/singlufest-rebuild.log 2>/dev/null | grep -cE 'Started\$|Recreated.*Started|exit code|^Error|Failed'" 2>/dev/null || echo "0")
+            if [ "$DONE" -gt "0" ]; then
+              echo "✓ Build terminado, container reiniciado"
               break
             fi
-            echo "[$i/36] $STATUS — esperando 10s..."
+            echo "[$i/60] build en curso, esperando 10s..."
             sleep 10
           done
 
-          echo "Smoke test endpoints:"
-          for path in / /api/health /cartel /admin/login; do
-            CODE=$(curl -s --max-time 8 -o /dev/null -w "%{http_code}" "https://singlufest.hubstartidea.es$path")
-            echo "  $CODE  $path"
-            if [ "$CODE" != "200" ]; then
-              echo "❌ $path no responde 200"
+      - name: Wait for healthy
+        run: |
+          echo "Esperando container healthy (timeout 3 min)..."
+          for i in {1..18}; do
+            STATUS=$(ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+              "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+              "docker ps --filter name=singlufest-singlufest-app --format '{{.Status}}'" 2>/dev/null || echo "ssh-error")
+            if echo "$STATUS" | grep -qF "(healthy)"; then
+              echo "✓ Container healthy: $STATUS"
+              break
+            fi
+            echo "[$i/18] $STATUS — esperando 10s..."
+            sleep 10
+            if [ "$i" = "18" ]; then
+              echo "❌ Timeout: container no llegó a healthy en 3 min"
               exit 1
             fi
           done
+
+      - name: Smoke test
+        run: |
+          echo "Smoke test endpoints:"
+          FAIL=0
+          for path in / /api/health /cartel /admin/login; do
+            CODE=$(curl -s --max-time 12 -o /dev/null -w "%{http_code}" "https://singlufest.hubstartidea.es$path")
+            echo "  $CODE  $path"
+            if [ "$CODE" != "200" ]; then
+              echo "❌ $path no responde 200"
+              FAIL=1
+            fi
+          done
+          if [ "$FAIL" = "1" ]; then exit 1; fi
           echo "✓ Deploy OK"
 
       - name: Cleanup SSH key
