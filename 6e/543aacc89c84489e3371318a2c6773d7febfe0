@@ -1,0 +1,38 @@
+components/v2/Tickets.tsx
+  s_2973c3e7d39dce::t_a959e460ad9afe 44
+components/v2/FinalCta.tsx
+  s_2973c3e7d39dce::t_c329687ac54b1f 25
+components/v2/Manifesto.tsx
+  s_2973c3e7d39dce::t_ca5085cfec43cb 21
+app/(public)/aftermovie/page.tsx
+  s_2973c3e7d39dce::t_69f42132bf5302 34
+components/v2/Hero.tsx
+  s_2973c3e7d39dce::t_a792a6c290b5b9 113
+  s_2973c3e7d39dce::t_b995ba1f9d411d 59
+app/(public)/partner/[slug]/page.tsx
+  s_2973c3e7d39dce::t_acc1bd97842d93 12-13
+app/(public)/b2b/page.tsx
+  s_2973c3e7d39dce::t_558e512a939404 21
+  s_2973c3e7d39dce::t_762c4f4c550294 82
+app/(public)/cartel/page.tsx
+  s_2973c3e7d39dce::t_1b4d9f10d140af 23
+  s_2973c3e7d39dce::t_74e053fbd4c618 6-7
+  s_2973c3e7d39dce::t_8fd2b5c607cefa 10
+  s_2973c3e7d39dce::t_5dd701e1c04cb2 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "6e543aacc89c84489e3371318a2c6773d7febfe0",
+  "prompts": {},
+  "sessions": {
+    "s_2973c3e7d39dce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20f5a1d7-df58-4cf2-8aa9-ae5af2939623",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
