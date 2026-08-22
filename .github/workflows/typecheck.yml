@@ -23,6 +23,17 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
+      - name: Admin bootstrap regression tests
+        run: npm run test:seed
+
+      - name: Validate bootstrap Compose profile
+        env:
+          DB_PASSWORD: ci-only-not-a-secret
+          AUTH_SECRET: ci-only-not-a-secret
+          ADMIN_EMAIL: admin@example.invalid
+          ADMIN_PASSWORD: V3ry-Long-CI-Passphrase!
+        run: docker compose --profile bootstrap config --quiet
+
       - name: TypeScript check
         run: npx tsc --noEmit
 

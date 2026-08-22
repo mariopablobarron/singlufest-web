@@ -65,6 +65,21 @@ services:
       - traefik.http.middlewares.singlufest-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.singlufest-redirect.redirectscheme.permanent=true
 
+  # Perfil one-shot: ADMIN_PASSWORD solo entra en este contenedor efímero.
+  # El servicio web nunca recibe las credenciales de bootstrap.
+  singlufest-seed:
+    image: singlufest-app:latest
+    profiles: [bootstrap]
+    depends_on:
+      singlufest-db: { condition: service_healthy }
+    environment:
+      DATABASE_URL: "postgresql://singlufest:${DB_PASSWORD}@singlufest-db:5432/singlufest?schema=public"
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      NODE_ENV: production
+    command: ["./node_modules/.bin/tsx", "scripts/seed.ts"]
+    networks: [singlufest-internal]
+
 networks:
   singlufest-internal:
     driver: bridge

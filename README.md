@@ -40,18 +40,21 @@ Dockerfile           # multistage Node 22 + Next standalone
 ```bash
 # 1. Variables
 cp .env.example .env
-# rellena DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), ADMIN_*
+# rellena DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), ADMIN_EMAIL
+# no guardes ADMIN_PASSWORD en .env
 
 # 2. Deps
 npm install
 
 # 3. BD (necesitas Postgres local; o levanta solo el servicio db con docker compose up -d singlufest-db)
 npx prisma migrate dev
-npm run db:seed
+read -rsp "Contraseña inicial del admin: " ADMIN_PASSWORD; printf '\n'
+ADMIN_PASSWORD="$ADMIN_PASSWORD" npm run db:seed
+unset ADMIN_PASSWORD
 
 # 4. Dev
 npm run dev
-# http://localhost:3000  ·  /admin/login con ADMIN_EMAIL/ADMIN_PASSWORD del .env
+# http://localhost:3000  ·  /admin/login con la credencial creada en el seed
 ```
 
 ## Deploy en VPS (Hostinger / Coolify)
@@ -64,8 +67,14 @@ npm run dev
    ```bash
    cd /data/singlufest-startidea
    docker compose up -d --build
-   docker compose exec singlufest-app npm run db:seed
+   read -rsp "Contraseña inicial del admin: " ADMIN_PASSWORD; printf '\n'
+   ADMIN_PASSWORD="$ADMIN_PASSWORD" docker compose --profile bootstrap run --rm --no-deps singlufest-seed
+   unset ADMIN_PASSWORD
    ```
+   El perfil `bootstrap` es efímero: la app web no recibe `ADMIN_PASSWORD`.
+   No guardes esa variable en `.env`. Debe tener un mínimo de 20 caracteres y
+   combinar al menos tres clases. Un reseed conserva contraseña, rol y estado
+   del admin existente.
 4. **SSL**: Traefik emite cert Let's Encrypt automáticamente al detectar el container `healthy`.
 5. **Crons VPS** (`crontab -e`):
    ```cron

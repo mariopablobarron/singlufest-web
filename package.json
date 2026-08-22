@@ -13,6 +13,7 @@
     "prisma:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "db:seed": "tsx scripts/seed.ts",
+    "test:seed": "tsx --test scripts/bootstrap-admin.test.ts",
     "agents:redactor": "tsx agents/redactor/run.ts",
     "agents:analista": "tsx agents/analista/run.ts"
   },
