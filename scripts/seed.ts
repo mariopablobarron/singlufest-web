@@ -6,32 +6,20 @@
  *   npm run db:seed
  *
  * Variables relevantes:
- *   ADMIN_EMAIL, ADMIN_PASSWORD
+ *   ADMIN_EMAIL, ADMIN_PASSWORD (solo bootstrap inicial)
  */
 import bcrypt from "bcryptjs";
 import { prisma } from "../lib/db";
+import { ensureBootstrapAdmin } from "./bootstrap-admin";
 
 async function main() {
-  const adminEmail = process.env.ADMIN_EMAIL || "mario@startidea.es";
-  const adminPassword = process.env.ADMIN_PASSWORD || "ChangeMe123!";
-
-  const passwordHash = await bcrypt.hash(adminPassword, 12);
-  const admin = await prisma.user.upsert({
-    where: { email: adminEmail },
-    create: {
-      email: adminEmail,
-      name: "Admin Singlufest",
-      passwordHash,
-      role: "ADMIN",
-      isActive: true,
-    },
-    // Re-hashea con la pwd actual del .env y reactiva. Si quieres preservar la pwd
-    // existente sin tocarla, usa SEED_PRESERVE_PASSWORD=1.
-    update: process.env.SEED_PRESERVE_PASSWORD === "1"
-      ? {}
-      : { passwordHash, role: "ADMIN", isActive: true },
+  const { admin, created } = await ensureBootstrapAdmin({
+    env: process.env,
+    findByEmail: (email) => prisma.user.findUnique({ where: { email } }),
+    createAdmin: (data) => prisma.user.create({ data }),
+    hashPassword: (password) => bcrypt.hash(password, 12),
   });
-  console.log("✓ Admin:", admin.email);
+  console.log(created ? "✓ Admin creado" : "✓ Admin existente preservado");
 
   // Settings (singleton)
   const existing = await prisma.siteSettings.findFirst();

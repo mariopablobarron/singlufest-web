@@ -65,11 +65,17 @@ El boot del container ejecuta `prisma migrate deploy && node server.js`:
 ## 4. Seed inicial
 
 ```bash
-docker compose exec singlufest-app node -e "import('./scripts/seed.js')" \
-  || docker compose exec singlufest-app npx tsx scripts/seed.ts
+read -rsp "Contraseña inicial del admin: " ADMIN_PASSWORD; printf '\n'
+ADMIN_PASSWORD="$ADMIN_PASSWORD" docker compose --profile bootstrap run --rm --no-deps singlufest-seed
+unset ADMIN_PASSWORD
 ```
 
-(En la imagen de producción `tsx` quizás no esté disponible; opción alternativa es ejecutar seed en build local antes de subir, o transpilar el script.)
+El servicio `singlufest-seed` es one-shot y recibe `ADMIN_EMAIL` y
+`ADMIN_PASSWORD` solo desde el entorno del comando; `singlufest-app` no recibe
+esas variables. No guardes `ADMIN_PASSWORD` en `.env`. En un bootstrap nuevo
+faltará cerrado si la contraseña está vacía, tiene menos de 20 caracteres o no
+combina al menos tres clases. En un reseed, el admin existente se reutiliza sin
+cambiar `passwordHash`, rol ni estado.
 
 ## 5. Crons VPS
 
