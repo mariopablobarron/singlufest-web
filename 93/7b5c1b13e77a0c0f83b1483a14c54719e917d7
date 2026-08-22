@@ -1,0 +1,38 @@
+docker-compose.yml
+  s_5cc4671b80d79c::t_b9e616f8f49b6c 80
+  s_5cc4671b80d79c::t_8ba327e67d2006 68-79,81-82
+README.md
+  s_5cc4671b80d79c::t_ee53519b547e84 43-44,51-53,57,70-72,75-77
+  s_5cc4671b80d79c::t_8ba327e67d2006 74
+scripts/bootstrap-admin.ts
+  s_5cc4671b80d79c::t_8ba327e67d2006 1-79
+scripts/seed.ts
+  s_5cc4671b80d79c::t_8ba327e67d2006 9,13,16-20,22
+scripts/bootstrap-admin.test.ts
+  s_5cc4671b80d79c::t_8ba327e67d2006 1-105
+package.json
+  s_5cc4671b80d79c::t_8ba327e67d2006 16
+.env.example
+  s_5cc4671b80d79c::t_ee53519b547e84 9-10
+docs/deploy.md
+  s_5cc4671b80d79c::t_ee53519b547e84 68-70,74-78
+  s_5cc4671b80d79c::t_8ba327e67d2006 73
+.github/workflows/typecheck.yml
+  s_5cc4671b80d79c::t_bc716a34354990 26-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "937b5c1b13e77a0c0f83b1483a14c54719e917d7",
+  "prompts": {},
+  "sessions": {
+    "s_5cc4671b80d79c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a026e9-cdb5-7833-a5ac-183a923ec421",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "mariopablobarron <mariopablobarron@users.noreply.github.com>"
+    }
+  }
+}
